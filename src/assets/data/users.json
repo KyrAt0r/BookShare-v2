@@ -1,0 +1,20 @@
+{
+  "userList":[
+    {
+      "id": 0,
+      "login": "Vadim",
+      "password": "Vadim"
+    },
+    {
+      "id": 1,
+      "login": "Yura",
+      "password": "Yura"
+    },
+    {
+      "id": 2,
+      "login": "God",
+      "password": "God"
+    }
+  ]
+}
+
