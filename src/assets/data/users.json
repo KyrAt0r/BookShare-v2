@@ -2,17 +2,20 @@
   "userList":[
     {
       "id": 0,
+      "email": "vadim@m.com",
       "login": "Vadim",
       "password": "Vadim"
     },
     {
       "id": 1,
       "login": "Yura",
+      "email": "yura@m.com",
       "password": "Yura"
     },
     {
       "id": 2,
       "login": "God",
+      "email": "god@m.com",
       "password": "God"
     }
   ]
