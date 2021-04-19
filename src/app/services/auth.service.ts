@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http'
-import {delay} from "rxjs/operators";
+import {HttpClient} from '@angular/common/http';
 
-
-interface user {
-  login: string;
+interface UserAuth {
+  email: string;
   password: string;
 }
 
@@ -13,21 +11,17 @@ interface user {
 })
 export class AuthService {
 
-  users: user[]=[];
+  users: UserAuth[] = [];
 
   constructor(private http: HttpClient) {
   }
 
 
-  logIn(login: string, password: string) {
-    if (login == "admin" && password == "admin"){
-      return true;
-    }else {
-      this.http.get<user>('./assets/data/users.json').subscribe(data => this.users=data["userList"]);
-      console.log(this.users)
-      return this.users.some(x => x.login == login && x.password == password);
-    }
-
+  logIn(email: string, password: string) {
+    return this.http.get<UserAuth[]>('./assets/data/users.json')
+      .subscribe(data => {
+        return data.some(x => x.email === email && x.password === password);
+      }
+    );
   }
-
 }

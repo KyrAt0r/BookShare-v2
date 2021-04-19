@@ -1,28 +1,47 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <label>Логин:
-    <input
-      type="email"
-      [formControlName]="'login'"
-      [ngClass]="{
-      empty: form.get('login')?.invalid && (form.get('login')?.touched || form.get('login')?.dirty),
-      valid: form.get('login')?.valid
-      }"
-    />
-  <span *ngIf="form.get('login')?.invalid && (form.get('login')?.touched || form.get('login')?.dirty)"
-  >*Обязательно для заполнения</span>
-  </label>
-  <label> Пароль:
-    <input
-      type="text"
-      [formControlName]="'password'"
-      [ngClass]="{
-      empty: form.get('password')?.invalid && (form.get('password')?.touched || form.get('password')?.dirty),
-      valid: form.get('password').valid
-      }"
-    />
-    <span *ngIf="form.get('password')?.invalid && (form.get('password')?.touched || form.get('password')?.dirty)"
-    >*Обязательно для заполнения</span>
-  </label>
-  <button type="submit" >Войти</button>
-</form>
+<div class="main">
+  <form class="example-form" [formGroup]="form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Email:</mat-label>
+      <input
+        type="email"
+        matInput
+        formControlName="email"
+        placeholder="E-mail"
+      />
+      <mat-error
+        *ngIf="form.get('email').hasError('email') && !form.get('email').hasError('required')"
+      >
+        Please enter a valid email address
+      </mat-error>
+      <mat-error
+        *ngIf="form.get('email')?.invalid && (form.get('email')?.touched || form.get('email')?.dirty)"
+      >
+        Обязательно для заполнения
+      </mat-error>
+    </mat-form-field>
+    <p>
+      <mat-form-field class="example-full-width">
+        <mat-label>Пароль:</mat-label>
+        <input
+          type="password"
+          matInput
+          formControlName="password"
+          placeholder="Пароль"
+        />
+        <mat-error
+          *ngIf="form.get('password').hasError('password') && !form.get('password').hasError('password')"
+        >
+          Please enter a valid email address
+        </mat-error>
+        <mat-error
+          *ngIf="form.get('password')?.invalid && (form.get('password')?.touched || form.get('password')?.dirty)"
+        >
+          Обязательно для заполнения
+        </mat-error>
+      </mat-form-field>
+    </p>
+    <button mat-button type="submit">Войти</button>
 
+
+  </form>
+</div>

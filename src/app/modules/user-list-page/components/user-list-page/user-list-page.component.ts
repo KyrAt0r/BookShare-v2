@@ -1,6 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {User, UsersService} from "../../../../services/users.service";
-import {switchMap} from "rxjs/operators";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {UserServerResponse, UsersService} from '../../../../services/users.service';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
+
+
 
 @Component({
   selector: 'app-user-list-page',
@@ -11,12 +14,26 @@ import {switchMap} from "rxjs/operators";
 
 export class UserListPageComponent implements OnInit {
 
-  users: User[]=[];
+  users: UserServerResponse[] = [];
 
-  constructor(private usersList: UsersService) {}
+  constructor(private usersList: UsersService) {
+  }
+  displayedColumns: string[] = ['login', 'e-mail'];
+  dataSource = new MatTableDataSource<UserServerResponse>(this.users);
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit(): void {
-    this.usersList.getUsers().subscribe(data => this.users=data);
+    this.loadUsers();
   }
 
+  // tslint:disable-next-line:typedef
+  loadUsers() {
+    this.usersList.getUsers()
+      .subscribe(data => {
+        console.log(data);
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.paginator = this.paginator;
+      });
+  }
 }
