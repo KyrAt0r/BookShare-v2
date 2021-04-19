@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {AuthService} from '../../../../services/auth.service';
 import {Router} from '@angular/router';
 
@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 export class AuthenticationLoginComponent {
   form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(4)]],
+    password: ['', [Validators.required, Validators.minLength(3)]],
   });
   errMessage: string;
 
@@ -24,10 +24,10 @@ export class AuthenticationLoginComponent {
 
   onSubmit() {
     if (this.authService.logIn(this.form.get('email').value, this.form.get('password').value)) {
-      console.log(this.authService.logIn(this.form.get('username')?.value, this.form.get('password').value));
       this.router.navigate(['home']);
     } else {
       this.errMessage = 'Пользователь не найден или неверный пароль';
     }
+    // console.log(this.authService.logIn(this.form.get('username')?.value, this.form.get('password').value));
   }
 }

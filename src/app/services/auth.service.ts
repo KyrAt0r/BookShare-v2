@@ -18,6 +18,10 @@ export class AuthService {
 
 
   logIn(email: string, password: string) {
+    console.log(this.http.get<UserAuth[]>('./assets/data/users.json')
+      .subscribe(data => {
+        return data.some(x => x.email === email && x.password === password);
+      }));
     return this.http.get<UserAuth[]>('./assets/data/users.json')
       .subscribe(data => {
         return data.some(x => x.email === email && x.password === password);
