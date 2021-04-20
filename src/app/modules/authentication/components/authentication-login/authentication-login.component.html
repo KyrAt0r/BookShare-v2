@@ -1,6 +1,6 @@
 <div class="grid-container">
   <form class="example-form login login-container" [formGroup]="form" (ngSubmit)="onSubmit()">
-
+    <div class="label-form">Авторизация</div>
       <div class="email">
         <mat-form-field class="example-full-width">
           <mat-label>Email</mat-label>
@@ -47,7 +47,7 @@
         <button mat-button type="submit">Войти</button>
       </div>
     <div>
-      <mat-error *ngIf="errMessage">111111</mat-error>
+      <mat-error *ngIf="errMessage">{{errMessage}}</mat-error>
     </div>
 
   </form>

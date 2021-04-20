@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
-interface UserAuth {
+interface User {
   email: string;
   password: string;
 }
@@ -9,23 +11,35 @@ interface UserAuth {
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
 
-  users: UserAuth[] = [];
+  users: User[] = [];
+  isAuth: boolean;
 
   constructor(private http: HttpClient) {
   }
 
 
-  logIn(email: string, password: string) {
-    console.log(this.http.get<UserAuth[]>('./assets/data/users.json')
-      .subscribe(data => {
-        return data.some(x => x.email === email && x.password === password);
-      }));
-    return this.http.get<UserAuth[]>('./assets/data/users.json')
-      .subscribe(data => {
-        return data.some(x => x.email === email && x.password === password);
-      }
-    );
+  logIn(email: string, password: string): Observable<boolean> {
+    return this.http.get<User[]>('./assets/data/users.json')
+      .pipe(
+        map(data => {
+            this.isAuth = data.some(user => user.email === email && user.password === password);
+            localStorage.setItem('authStatus', String(this.isAuth));
+            return this.isAuth;
+          }
+        ));
   }
+
+
+  getAuthStatus(): boolean {
+    return this.isAuth;
+  }
+
+  logOut() {
+    this.isAuth = false;
+
+  }
+
 }

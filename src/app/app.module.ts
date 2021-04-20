@@ -7,6 +7,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AppShellComponent } from './components/app-shell/app-shell.component';
 import {HttpClientModule} from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -14,12 +15,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NotFoundComponent,
     AppShellComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatButtonModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
