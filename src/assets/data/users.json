@@ -3,25 +3,29 @@
     "id": 0,
     "email": "vadim@m.com",
     "login": "Vadim",
-    "password": "Vadim"
+    "password": "Vadim",
+    "role": ""
   },
   {
     "id": 1,
     "login": "Yura",
     "email": "yura@m.com",
-    "password": "Yura"
+    "password": "Yura",
+    "role": ""
   },
   {
     "id": 2,
     "login": "God",
     "email": "god@m.com",
-    "password": "God"
+    "password": "God",
+    "role": "admin"
   },
   {
     "id": 3,
     "login": "admin",
     "email": "admin@m",
-    "password": "admin"
+    "password": "admin",
+    "role": "admin"
   }
 ]
 

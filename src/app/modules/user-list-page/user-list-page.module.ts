@@ -4,6 +4,7 @@ import { UserListPageComponent } from './components/user-list-page/user-list-pag
 import {UserListPageRoutingModule} from "./user-list-routing.module";
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
+import {MatInputModule} from '@angular/material/input';
 
 
 
@@ -15,7 +16,8 @@ import {MatTableModule} from '@angular/material/table';
     CommonModule,
     UserListPageRoutingModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatInputModule
   ]
 })
 export class UserListPageModule { }

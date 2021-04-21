@@ -28,7 +28,9 @@ nav {
 }
 
 main {
-  padding: 0 10px;
-  overflow: auto;
-  height: 100%;
+  grid-area: 2 / 1 / 2 / 2;
+}
+
+router-outlet{
+
 }

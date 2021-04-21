@@ -18,7 +18,7 @@ export class UserListPageComponent implements OnInit {
 
   constructor(private usersList: UsersService) {
   }
-  displayedColumns: string[] = ['login', 'e-mail'];
+  displayedColumns: string[] = ['login', 'e-mail', 'role'];
   dataSource = new MatTableDataSource<UserServerResponse>(this.users);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -35,5 +35,10 @@ export class UserListPageComponent implements OnInit {
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
       });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }
