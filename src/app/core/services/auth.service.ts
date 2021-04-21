@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {map} from 'rxjs/operators';
+import {delay, map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 
 interface User {
@@ -13,8 +13,6 @@ interface User {
 })
 
 export class AuthService {
-
-  users: User[] = [];
   isAuth: boolean;
 
   constructor(private http: HttpClient) {
@@ -24,22 +22,23 @@ export class AuthService {
   logIn(email: string, password: string): Observable<boolean> {
     return this.http.get<User[]>('./assets/data/users.json')
       .pipe(
+        delay(1000),
         map(data => {
             this.isAuth = data.some(user => user.email === email && user.password === password);
-            localStorage.setItem('authStatus', String(this.isAuth));
+            localStorage.setItem('authStatus', String(true));
             return this.isAuth;
           }
         ));
   }
 
-
   getAuthStatus(): boolean {
-    return this.isAuth;
+    return Boolean(localStorage.getItem('authStatus'));
   }
 
-  logOut() {
+  logOut(): boolean {
     this.isAuth = false;
-
+    localStorage.removeItem('authStatus');
+    return true;
   }
 
 }

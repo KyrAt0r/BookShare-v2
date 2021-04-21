@@ -3,8 +3,8 @@
     <li><a [routerLink]="'home'">Главная</a></li>
     <li><a [routerLink]="'user-list'">Список пользователей</a></li>
     <li><a [routerLink]="''">в разработке</a></li>
-    <li style="position: center"><a mat-button [routerLink]="'login'">Войти</a></li>
-    <li *ngIf="loginStatus" style="position: center"><a mat-button [routerLink]="'login'">Выйти</a></li>
+    <li style="position: center" *ngIf="!loginStatus()"><button mat-button [routerLink]="'login'">Войти</button></li>
+    <li style="position: center" *ngIf="loginStatus()"><button mat-button (click)="logout()">Выйти</button></li>
   </ul>
 </nav>
 <main>

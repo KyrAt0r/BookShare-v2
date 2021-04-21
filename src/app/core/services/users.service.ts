@@ -19,16 +19,4 @@ export class UsersService {
   getUsers(): Observable<UserServerResponse[]> {
     return this.http.get<UserServerResponse[]>('./assets/data/users.json');
   }
-
-   // getUsers(): Observable<UserServerResponse[]> {
-   //   return this.http.get('./assets/data/users.json').pipe(map(data => {
-   //     const usersList = data['userList'];
-   //     return usersList.map(user => {
-   //       return {
-   //         login: user.login,
-   //         email: user.email
-   //       };
-   //     });
-   //   }));
-   // }
 }
