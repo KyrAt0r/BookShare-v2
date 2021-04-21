@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {AuthService} from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-app-shell',
@@ -7,10 +9,26 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AppShellComponent implements OnInit {
 
-  constructor() {
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {
+
   }
 
   ngOnInit(): void {
+  }
+
+  logout(): void {
+    if (this.authService.logOut()) {
+      this.router.navigate(['login']);
+    }
+  }
+
+  loginStatus(): boolean {
+    if (this.authService.getAuthStatus()) {
+      return true;
+    }
   }
 
 }

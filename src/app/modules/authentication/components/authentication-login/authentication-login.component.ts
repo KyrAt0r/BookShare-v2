@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
-import {AuthService} from "../../../../services/auth.service";
-import {Router} from "@angular/router";
+import {FormBuilder, Validators} from '@angular/forms';
+import {AuthService} from '../../../../core/services/auth.service';
+import {Router} from '@angular/router';
+import {delay} from 'rxjs/operators';
 
 @Component({
   selector: 'app-authentication-login',
@@ -10,10 +11,11 @@ import {Router} from "@angular/router";
 })
 export class AuthenticationLoginComponent {
   form = this.fb.group({
-    login: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(4)]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(3)]],
   });
   errMessage: string;
+  loginStatus: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -22,13 +24,15 @@ export class AuthenticationLoginComponent {
   ) {
   }
 
-
   onSubmit() {
-    if (this.authService.logIn(this.form.get('login').value, this.form.get('password').value)) {
-      this.router.navigate(['home']);
-    } else {
-      this.errMessage = "Пользователь не найден или неверный пароль";
-    }
-    //console.log(this.authService.logIn(this.form.get('username')?.value,this.form.get('password')?.value))
+    this.authService.logIn(this.form.get('email')?.value, this.form.get('password').value)
+      .subscribe(data => {
+        if (data){
+          delay(10000);
+          this.router.navigate(['home']);
+        } else {
+          this.errMessage = 'Пользователь не найден или неверный пароль';
+        }
+      });
   }
 }
