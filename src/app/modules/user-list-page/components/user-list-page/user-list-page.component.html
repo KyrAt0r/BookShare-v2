@@ -10,7 +10,7 @@
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="login">
         <th mat-header-cell *matHeaderCellDef> Логин</th>
-        <td mat-cell *matCellDef="let users"> {{users.login}} </td>
+        <td mat-cell *matCellDef="let users"> {{users.userName}} </td>
       </ng-container>
 
       <ng-container matColumnDef="e-mail">
