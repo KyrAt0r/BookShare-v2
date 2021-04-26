@@ -1,0 +1,12 @@
+<div class="content">
+  <div class="label">
+    <div class="text"><h1>Книги</h1></div>
+  </div>
+  <div class="content-cont" *ngFor="let book of books">
+    <div class="label-book"></div>
+    <div class="info-cont">
+      <p>{{book.annotation}}</p>
+      <div class="rank"></div>
+    </div>
+  </div>
+</div>

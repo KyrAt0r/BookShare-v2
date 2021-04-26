@@ -1,0 +1,42 @@
+.content {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.3fr 2.7fr 0.1fr;
+  gap: 20px 0px;
+}
+
+.label {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0px 0px;
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.text {
+  grid-area: 2 / 1 / 3 / 2;
+}
+
+.content-cont {
+  display: grid;
+  grid-template-columns: 0.5fr 1.5fr 1fr;
+  grid-template-rows: 0.2fr 0.8fr 2fr;
+  gap: 0px 0px;
+  grid-area: 2 / 1 / 3 / 2;
+}
+
+.label-book {
+  grid-area: 1 / 1 / 2 / 4;
+}
+
+.info-cont {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 0.6fr;
+  grid-template-rows: 0.2fr 1.8fr;
+  gap: 0px 0px;
+  grid-area: 2 / 2 / 4 / 4;
+}
+
+.rank {
+  grid-area: 1 / 3 / 2 / 4;
+}

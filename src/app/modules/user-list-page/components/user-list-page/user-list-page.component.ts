@@ -31,7 +31,6 @@ export class UserListPageComponent implements OnInit {
   loadUsers() {
     this.usersList.getUsers()
       .subscribe(data => {
-        console.log(data);
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
       });

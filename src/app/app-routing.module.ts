@@ -20,6 +20,14 @@ const routes: Routes = [
         },
       },
       {
+        path: 'book-list',
+        loadChildren: () => import('./modules/book-list-page/book-list-page.module').then(m => m.BookListPageModule),
+        data: {
+          preload: true,
+          title: 'Список книг',
+        },
+      },
+      {
         path: 'user-list',
         loadChildren: () => import('./modules/user-list-page/user-list-page.module').then(m => m.UserListPageModule),
         data: {
@@ -33,7 +41,7 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./modules/authentication/authentication.module').then(m => m.AuthenticationModule),
-    data: { preload: false, title: 'Авторизация' },
+    data: {preload: false, title: 'Авторизация'},
     canActivate: [LoginPageGuard],
   },
   {
