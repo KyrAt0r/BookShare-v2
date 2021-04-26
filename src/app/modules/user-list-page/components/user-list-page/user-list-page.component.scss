@@ -1,0 +1,21 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 0.5fr 2.4fr 0.7fr 0.5fr;
+  grid-template-rows: 0.1fr repeat(2, 0.2fr) 3.6fr;
+  gap: 1% 1%;
+}
+
+.header { grid-area: 2 / 2 / 3 / 4; }
+
+.table { grid-area: 4 / 2 / 5 / 4; }
+
+.search { grid-area: 3 / 3 / 4 / 4; }
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}

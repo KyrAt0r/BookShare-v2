@@ -1,0 +1,54 @@
+<div class="grid-container">
+  <form class="example-form login login-container" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="label-form">Авторизация</div>
+      <div class="email">
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input
+            type="email"
+            matInput
+            formControlName="email"
+            placeholder="Адрес эл. почты"
+          />
+          <mat-error
+            *ngIf="form.get('email').hasError('email') && !form.get('email').hasError('required')"
+          >
+            Ввено неправильное значение
+          </mat-error>
+          <mat-error
+            *ngIf="form.get('email')?.invalid && (form.get('email')?.touched || form.get('email')?.dirty)"
+          >
+            Обязательно для заполнения
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="pass">
+        <mat-form-field class="example-full-width">
+          <mat-label>Пароль</mat-label>
+          <input
+            type="password"
+            matInput
+            formControlName="password"
+            placeholder="Пароль"
+          />
+          <mat-error
+            *ngIf="form.get('password').hasError('password') && !form.get('password').hasError('password')"
+          >
+            Ввено неправильное значение
+          </mat-error>
+          <mat-error
+            *ngIf="form.get('password')?.invalid && (form.get('password')?.touched || form.get('password')?.dirty)"
+          >
+            Обязательно для заполнения
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="button">
+        <button mat-button type="submit">Войти</button>
+      </div>
+    <div>
+      <mat-error *ngIf="errMessage">{{errMessage}}</mat-error>
+    </div>
+
+  </form>
+</div>
