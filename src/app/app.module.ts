@@ -8,6 +8,7 @@ import { AppShellComponent } from './components/app-shell/app-shell.component';
 import {HttpClientModule} from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {MatButtonModule} from '@angular/material/button';
         AppRoutingModule,
         HttpClientModule,
         BrowserAnimationsModule,
-        MatButtonModule
+        MatButtonModule,
+        MatIconModule
     ],
   providers: [],
   bootstrap: [AppComponent]
