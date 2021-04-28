@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {AuthService} from '../../../../core/services/auth.service';
 import {Router} from '@angular/router';
@@ -7,7 +7,8 @@ import {delay} from 'rxjs/operators';
 @Component({
   selector: 'app-authentication-login',
   templateUrl: './authentication-login.component.html',
-  styleUrls: ['./authentication-login.component.scss']
+  styleUrls: ['./authentication-login.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuthenticationLoginComponent {
   form = this.fb.group({

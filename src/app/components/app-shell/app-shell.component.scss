@@ -1,18 +1,17 @@
-$text-size-primary: 18px;
-$text-color-primary: #eaeaec;
-$bg-header-color: #32626d; //#19181a;
+@import 'src/scss/costants.sass';
 
-$bg-main-content-color: #a8d4a7;
+$text-size-primary: $header-text-size;
+$text-color-primary: $header-text-color;
+$bg-header-color: $bg-header;
+$bg-main-content-color: $bg-gradient;
 
 :host {
   display: grid;
   grid-template-columns: 0.5fr 2fr 0.5fr;
-  grid-template-rows: 0.1fr 1.9fr;
+  grid-template-rows: 56px 1.9fr;
   gap: 0 0;
-  height: 100%;
-  //background-color: $bg-main-content-color;
-  background: rgb(236,188,255);
-  background: linear-gradient(45deg, rgba(236,188,255,1) 0%, rgba(193,255,206,1) 100%);
+  min-height: 100%;
+  background:$bg-main-content-color;
 }
 
 nav {

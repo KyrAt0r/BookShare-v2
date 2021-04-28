@@ -1,1 +1,5 @@
 <h1>Чуи мы дома</h1>
+<form [formGroup]="form">
+<app-star-rating formControlName="rating" [id]="'rating'"></app-star-rating>
+  <div>Rating: {{form.value.rating}}</div>
+</form>
