@@ -1,4 +1,12 @@
-import {ChangeDetectionStrategy, Component, ElementRef, forwardRef, Input, QueryList, ViewChildren} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  forwardRef,
+  Input,
+  QueryList,
+  ViewChildren
+} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
@@ -16,10 +24,11 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 })
 export class StarRatingComponent implements ControlValueAccessor {
   @Input() stars = [1, 2, 3, 4, 5];
+
+  @ViewChildren('checkbox') checkbox: QueryList<ElementRef>;
+
   value;
 
-  @Input() id: string;
-  @ViewChildren('checkbox') checkbox: QueryList<ElementRef>;
 
   constructor() {
   }
