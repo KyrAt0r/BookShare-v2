@@ -29,7 +29,6 @@ export class StarRatingComponent implements ControlValueAccessor {
 
   value;
 
-
   constructor() {
   }
 
@@ -56,3 +55,6 @@ export class StarRatingComponent implements ControlValueAccessor {
   private propagateChange = (_: any) => {
   };
 }
+
+
+//Посмотреть реактивные формы

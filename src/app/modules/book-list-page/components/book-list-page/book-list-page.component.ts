@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {BooksServerResponse, BooksService} from '../../../../core/services/books.service';
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-book-list-page',
@@ -10,6 +11,7 @@ import {BooksServerResponse, BooksService} from '../../../../core/services/books
 })
 export class BookListPageComponent implements OnInit {
   books: BooksServerResponse[] = [];
+  private subs: Subscription;
 
   constructor(
     private bookList: BooksService,
@@ -18,12 +20,16 @@ export class BookListPageComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
+    this.subs =
+      this.bookList.getBooks()
+        .subscribe(data => {
+          console.log(data);
+          this.books = data;
+          this.cdRef.markForCheck();
+        });
+  }
 
-    this.bookList.getBooks()
-      .subscribe(data => {
-        console.log(data);
-        this.books = data;
-        this.cdRef.markForCheck();
-      });
+  ngOnDestroy(){
+    if(this.subs) this.subs.unsubscribe()
   }
 }

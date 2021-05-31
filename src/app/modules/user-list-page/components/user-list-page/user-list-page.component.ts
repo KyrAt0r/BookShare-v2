@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/co
 import {UserServerResponse, UsersService} from '../../../../core/services/users.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-user-list-page',
@@ -14,9 +15,11 @@ import {MatTableDataSource} from '@angular/material/table';
 export class UserListPageComponent implements OnInit {
 
   users: UserServerResponse[] = [];
+  private subs: Subscription;
 
   constructor(private usersList: UsersService) {
   }
+
   displayedColumns: string[] = ['login', 'e-mail', 'role'];
   dataSource = new MatTableDataSource<UserServerResponse>(this.users);
 
@@ -28,16 +31,21 @@ export class UserListPageComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   loadUsers() {
-    this.usersList.getUsers()
-      .subscribe(data => {
-        this.dataSource = new MatTableDataSource(data);
-        this.dataSource.paginator = this.paginator;
-      });
+    this.subs =
+      this.usersList.getUsers()
+        .subscribe(data => {
+          this.dataSource = new MatTableDataSource(data);
+          this.dataSource.paginator = this.paginator;
+        });
   }
 
   // tslint:disable-next-line:typedef
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  ngOnDestroy() {
+    if (this.subs) this.subs.unsubscribe()
   }
 }
