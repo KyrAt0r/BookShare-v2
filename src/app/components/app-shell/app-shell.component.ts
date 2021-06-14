@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../core/services/auth.service';
 import {MatIconRegistry} from '@angular/material/icon';
@@ -8,7 +8,8 @@ import {LOGO_BOOKS, USER_IMG} from 'src/app/core/const/icons';
 @Component({
   selector: 'app-app-shell',
   templateUrl: './app-shell.component.html',
-  styleUrls: ['./app-shell.component.scss']
+  styleUrls: ['./app-shell.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppShellComponent implements OnInit {
   userName: string;
