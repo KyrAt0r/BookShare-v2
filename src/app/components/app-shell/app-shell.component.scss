@@ -67,8 +67,10 @@ nav {
       justify-items: center;
       align-items: center;
 
-      p {
-        margin: 0;
+
+      a {
+        text-decoration: none;
+        color: $text-color-primary;
       }
     }
 

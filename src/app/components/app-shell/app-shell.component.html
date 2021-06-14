@@ -15,7 +15,7 @@
   <div class="header__personal">
     <div class="header__personal__user-name" *ngIf="loginStatus()">
       <mat-icon svgIcon="user"></mat-icon>
-      <p>{{userName}}</p>
+      <a [routerLink]="'user'">{{userName}}</a>
     </div>
     <div class="header__personal__buttons" *ngIf="loginStatus()">
       <button mat-button (click)="logout()">Выйти</button>
