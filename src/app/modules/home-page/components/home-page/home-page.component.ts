@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-home-page',
@@ -8,13 +8,11 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomePageComponent implements OnInit {
-  public form: FormGroup;
+  form = this.fb.group({
+    rate: ['', Validators.required]
+  });
 
-  constructor(private fb: FormBuilder) {
-    this.form = this.fb.group({
-      rating: ['', Validators.required],
-    });
-  }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
   }

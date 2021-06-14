@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StarRatingComponent } from './components/star-rating/star-rating.component';
+import { StarRatingComponent } from './components/star-rate/star-rate.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -12,7 +13,8 @@ import { StarRatingComponent } from './components/star-rating/star-rating.compon
     StarRatingComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ]
 })
-export class StarRatingModule { }
+export class StarRateModule { }

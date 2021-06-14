@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { HomePageRoutingModule } from './home-routing.module';
-import {StarRatingModule} from '../../shared/modules/star-raiting/star-rating.module';
+import {StarRateModule} from '../../shared/modules/star-raiting/star-rate.module';
 import {ReactiveFormsModule} from '@angular/forms';
 
 
@@ -13,7 +13,7 @@ import {ReactiveFormsModule} from '@angular/forms';
   imports: [
     CommonModule,
     HomePageRoutingModule,
-    StarRatingModule,
+    StarRateModule,
     ReactiveFormsModule
   ]
 })

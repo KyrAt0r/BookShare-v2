@@ -1,0 +1,12 @@
+<div class="rating-area">
+<ng-container *ngFor="let star of stars">
+  <input
+    [formControl]="starControl"
+    type="radio"
+    name="star"
+    id="star-{{star}}"
+    [value]="star">
+  <label for="star-{{star}}"></label>
+</ng-container>
+</div>
+
