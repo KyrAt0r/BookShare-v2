@@ -14,7 +14,6 @@ export class HomePageComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

@@ -1,0 +1,15 @@
+.example-card{
+  max-width: 250px;
+
+  .example-header-image{
+    max-width: 250px;
+    max-height: 300px;
+    padding: 16px;
+  }
+
+  mat-card-title{
+    width: 250px;
+    height: 80px;
+    text-overflow: ellipsis;
+  }
+}

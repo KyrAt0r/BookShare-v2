@@ -35,6 +35,14 @@ const routes: Routes = [
           title: 'Список пользователей',
         },
       },
+      {
+        path: 'user',
+        loadChildren: () => import('./modules/user-page/user-page.module').then(m => m.UserPageModule),
+        data: {
+          preload: true,
+          title: 'Пользователь',
+        },
+      },
     ],
     canActivate: [AuthGuard],
   },

@@ -4,91 +4,112 @@
     "email": "vadim@m.com",
     "userName": "Vadim",
     "password": "Vadim",
-    "role": ""
+    "role": "",
+    "bookInUse": [
+      "0", "1", "2"
+    ]
   },
   {
     "id": 1,
     "email": "yura@m.com",
     "userName": "Yura",
     "password": "Yura",
-    "role": ""
+    "role": "",
+    "bookInUse": [
+      "0", "1", "2"
+    ]
   },
   {
     "id": 2,
     "email": "god@m.com",
     "userName": "God",
     "password": "God",
-    "role": "admin"
+    "role": "admin",
+    "bookInUse": [
+      "0", "1", "2"
+    ]
   },
   {
     "id": 3,
     "email": "admin@m",
     "userName": "admin",
     "password": "admin",
-    "role": "admin"
+    "role": "admin",
+    "bookInUse":[
+      0, 1, 2
+    ]
   },
   {
     "id": 4,
     "email": "user374@m",
     "userName": "user374",
     "password": "user374",
-    "role": ""
+    "role": "",
+    "bookInUse": ""
   },
   {
     "id": 5,
     "email": "KKKK@mail.com",
     "userName": "KKKKuser",
     "password": "KKKK",
-    "role": ""
+    "role": "",
+    "bookInUse": ""
   },
   {
     "id": 6,
     "email": "SadLion@gmail.com",
     "userName": "SadLion",
     "password": "SadLion",
-    "role": ""
+    "role": "",
+    "bookInUse": ""
   },
   {
     "id": 7,
     "email": "GGman@m",
     "userName": "GGman",
     "password": "GGman",
-    "role": ""
+    "role": "",
+    "bookInUse": ""
   },
   {
     "id": 8,
     "email": "uSer2312@m",
     "userName": "uSer2312",
     "password": "uSer2312",
-    "role": ""
+    "role": "",
+    "bookInUse": ""
   },
   {
     "id": 9,
     "email": "uSer@m",
     "userName": "uSer",
     "password": "uSer",
-    "role": ""
+    "role": "",
+    "bookInUse": ""
   },
   {
     "id": 10,
     "email": "user100@m",
     "userName": "user100",
     "password": "user100",
-    "role": ""
+    "role": "",
+    "bookInUse": ""
   },
   {
     "id": 11,
     "email": "user312@m",
     "userName": "user312",
     "password": "user312",
-    "role": ""
+    "role": "",
+    "bookInUse": ""
   },
   {
     "id": 12,
     "email": "user3@m",
     "userName": "user3",
     "password": "user3",
-    "role": ""
+    "role": "",
+    "bookInUse": ""
   }
 ]
 

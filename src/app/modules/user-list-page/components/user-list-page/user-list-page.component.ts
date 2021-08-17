@@ -1,8 +1,9 @@
 import {ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/core';
-import {UserServerResponse, UsersService} from '../../../../core/services/users.service';
+import {UsersService} from '../../../../core/services/users.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
-import {Subscription} from "rxjs";
+import {Subscription} from 'rxjs';
+import {User} from '../../../../core/models/user.models';
 
 @Component({
   selector: 'app-user-list-page',
@@ -14,14 +15,14 @@ import {Subscription} from "rxjs";
 
 export class UserListPageComponent implements OnInit {
 
-  users: UserServerResponse[] = [];
+  users: User[] = [];
   private subs: Subscription;
 
   constructor(private usersList: UsersService) {
   }
 
   displayedColumns: string[] = ['login', 'e-mail', 'role'];
-  dataSource = new MatTableDataSource<UserServerResponse>(this.users);
+  dataSource = new MatTableDataSource<User>(this.users);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

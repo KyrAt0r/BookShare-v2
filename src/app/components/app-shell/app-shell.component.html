@@ -1,31 +1,58 @@
 <header class="header">
-  <div class="header__logo">
-    <mat-icon svgIcon="logo_books" [routerLink]="'home'"></mat-icon>
-  </div>
-  <div class="header__main">
-    <nav class="header__nav">
-      <ul>
-        <li><a [routerLink]="'home'">Главная</a></li>
-        <li><a [routerLink]="'book-list'">Список книг</a></li>
-        <li><a [routerLink]="'user-list'">Список пользователей</a></li>
-        <li><a [routerLink]="''">в разработке</a></li>
-      </ul>
-    </nav>
-  </div>
-  <div class="header__personal">
-    <div class="header__personal__user-name" *ngIf="loginStatus()">
-      <mat-icon svgIcon="user"></mat-icon>
-      <p>{{userName}}</p>
-    </div>
-    <div class="header__personal__buttons" *ngIf="loginStatus()">
-      <button mat-button (click)="logout()">Выйти</button>
-    </div>
-    <div class="header__personal__buttons" *ngIf="!loginStatus()">
-      <button mat-button [routerLink]="'login'">Войти</button>
-    </div>
+  <a
+    class="header__logo-container"
+    [routerLink]="'home'"
+    title="Book Sharing"
+  >
+    <mat-icon svgIcon="logo_books" class="header__logo-container__logo"></mat-icon>
+    <span class="header__logo-container__title">Book Sharing</span>
+  </a>
+  <nav class="header__nav">
+    <ul>
+      <li><a [routerLink]="'home'">Главная</a></li>
+      <li><a [routerLink]="'book-list'">Список книг</a></li>
+      <li><a [routerLink]="'user-list'">Список пользователей</a></li>
+      <li><a [routerLink]="''">в разработке</a></li>
+    </ul>
+  </nav>
+  <div class="header__personal-info">
+    <a
+      *ngIf="loginStatus()"
+      class="header__personal-info__user-name-container"
+      [routerLink]="'user'"
+    >
+      <mat-icon
+        svgIcon="user"
+        class="header__personal-info__user-name-container__logo-user"
+        [matBadge]="booksInUse"
+        [matBadgeHidden]="booksInUse === 0"
+        matBadgeSize="small"
+        matBadgeColor="warn"
+      ></mat-icon>
+      <span class="header__personal-info__user-name-container__user-name">{{userName}}</span>
+    </a>
+    <button
+      *ngIf="loginStatus()"
+      mat-flat-button
+      class="header__personal-info__buttons"
+      color="warn"
+      (click)="logout()"
+    >
+      Выйти
+    </button>
+    <button
+      *ngIf="!loginStatus()"
+      mat-stroked-button
+      class="header__personal-info__buttons"
+      [routerLink]="'login'"
+    >
+      Войти
+    </button>
   </div>
 
 </header>
-<main>
-  <router-outlet></router-outlet>
+<main class="main">
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
 </main>
