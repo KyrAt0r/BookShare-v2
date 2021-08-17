@@ -5,6 +5,12 @@
 #grid-container {
   display: grid;
   gap: 15px 15px;
+
+  .card-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(19em, 1fr));
+    gap: 30px;
+  }
 }
 
 .title-page {
@@ -13,5 +19,15 @@
 
 .content {
   padding: 1.5rem;
+  max-width: 200px
 
+}
+.example-header-image{
+  max-width: 200px
+}
+
+.cards{
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
 }

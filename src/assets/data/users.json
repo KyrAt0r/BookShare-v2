@@ -5,7 +5,9 @@
     "userName": "Vadim",
     "password": "Vadim",
     "role": "",
-    "bookInUse": ""
+    "bookInUse": [
+      "0", "1", "2"
+    ]
   },
   {
     "id": 1,
@@ -13,7 +15,9 @@
     "userName": "Yura",
     "password": "Yura",
     "role": "",
-    "bookInUse": ""
+    "bookInUse": [
+      "0", "1", "2"
+    ]
   },
   {
     "id": 2,
@@ -21,7 +25,9 @@
     "userName": "God",
     "password": "God",
     "role": "admin",
-    "bookInUse": ""
+    "bookInUse": [
+      "0", "1", "2"
+    ]
   },
   {
     "id": 3,
@@ -29,7 +35,9 @@
     "userName": "admin",
     "password": "admin",
     "role": "admin",
-    "bookInUse": ""
+    "bookInUse":[
+      0, 1, 2
+    ]
   },
   {
     "id": 4,

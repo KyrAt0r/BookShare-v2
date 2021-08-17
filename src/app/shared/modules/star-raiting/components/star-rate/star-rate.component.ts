@@ -1,5 +1,5 @@
 import {
-  ChangeDetectionStrategy,
+  ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
   forwardRef,
   Input, OnInit
@@ -21,32 +21,38 @@ import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/for
 })
 export class StarRatingComponent implements OnInit, ControlValueAccessor {
   @Input() stars = [5, 4, 3, 2, 1];
+  @Input() readonly = false;
+  @Input() valStar: number;
+
   starControl = new FormControl();
   onChange;
   onTouch;
 
-  constructor() {
+  constructor(private cdRef: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
+    this.starControl = new FormControl(this.valStar);
+    console.log(this.valStar);
     this.starControl.valueChanges.subscribe((val) => {
       if (this.onChange) {
-        this.onChange(val)
-        console.log(val)
+        this.onChange(val);
+        this.cdRef.detectChanges();
       }
-    })
+    });
   }
 
-  writeValue(value) {
-    this.starControl.setValue(value)
+  writeValue(value): void {
+    this.starControl.setValue(value);
+    this.cdRef.detectChanges();
   }
 
-  registerOnChange(fn: any) {
-    this.onChange = fn
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
   }
 
-  registerOnTouched(fn: any) {
-    this.onTouch = fn
+  registerOnTouched(fn: any): void {
+    this.onTouch = fn;
   }
 }
 

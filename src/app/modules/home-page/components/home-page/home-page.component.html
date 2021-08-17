@@ -1,5 +1,7 @@
 <h1>Чуи мы дома</h1>
 <form [formGroup]="form">
-  <app-star-rate formControlName="rate"></app-star-rate>
+  <app-star-rate [valStar]="3"></app-star-rate>
 </form>
 <div>Rating: {{form.value.rate}}</div>
+
+<!--- <app-book-card></app-book-card>-->

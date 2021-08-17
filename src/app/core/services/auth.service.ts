@@ -2,12 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {delay, map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import {User} from '../models/user.models';
 
-interface User {
-  email: string;
-  userName: string;
-  password: string;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +22,11 @@ export class AuthService {
         delay(1000),
         map(data => {
             this.isAuth = data.some(user => user.email === email && user.password === password);
-            localStorage.setItem('authStatus', String(true));
-            localStorage.setItem('userName', String(this.getUserName(data, email)));
+            if (this.isAuth){
+              localStorage.setItem('authStatus', String(true));
+              localStorage.setItem('userName', String(this.getUserInfo(data, email).userName));
+              localStorage.setItem('id', String(this.getUserInfo(data, email).id));
+            }
             return this.isAuth;
           }
         ));
@@ -41,13 +40,13 @@ export class AuthService {
     this.isAuth = false;
     localStorage.removeItem('authStatus');
     localStorage.removeItem('userName');
+    localStorage.removeItem('id');
     return true;
   }
 
   // tslint:disable-next-line:typedef
-  getUserName(data, email) {
-    const userName = data.filter(user => user.email === email);
-    return userName[0].userName;
+  getUserInfo(data, email) {
+    return data.find(user => user.email === email);
   }
 
 }
