@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@an
 import {UsersService} from '../../../../core/services/users.service';
 import {Subscription} from 'rxjs';
 import {BooksServerResponse, BooksService} from '../../../../core/services/books.service';
+import {getUser} from '../../../../shared/models/get-user.model';
 
 @Component({
   selector: 'app-user-page',
@@ -27,19 +28,16 @@ export class UserPageComponent implements OnInit {
     this.subs =
       this.usersInfo.getUsers()
         .subscribe(data => {
-          this.name = this.getUser(data, this.id).userName;
-          this.role = this.getUser(data, this.id).role;
-          this.bookIdInUse = this.getUser(data, this.id).bookInUse;
+          this.name = getUser(data, this.id).userName;
+          this.role = getUser(data, this.id).role;
+          this.bookIdInUse = getUser(data, this.id).bookInUse;
           this.getUserBooks(this.bookIdInUse);
-          this.email = this.getUser(data, this.id).email;
+          this.email = getUser(data, this.id).email;
           this.cdRef.markForCheck();
         });
   }
 
-  getUser(data, id) {
-    return data.find(user => user.id === id);
-  }
-
+  // tslint:disable-next-line:typedef
   getUserBooks(id) {
     this.subsBook =
       this.bookList.getBooks()

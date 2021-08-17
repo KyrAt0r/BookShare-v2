@@ -21,7 +21,14 @@
       class="header__personal-info__user-name-container"
       [routerLink]="'user'"
     >
-      <mat-icon svgIcon="user" class="header__personal-info__user-name-container__logo-user"></mat-icon>
+      <mat-icon
+        svgIcon="user"
+        class="header__personal-info__user-name-container__logo-user"
+        [matBadge]="booksInUse"
+        [matBadgeHidden]="booksInUse === 0"
+        matBadgeSize="small"
+        matBadgeColor="warn"
+      ></mat-icon>
       <span class="header__personal-info__user-name-container__user-name">{{userName}}</span>
     </a>
     <button
