@@ -17,6 +17,8 @@
   </div>
   <div class="books">
     <div class="label"><p>Книги в пользовании:</p></div>
-    <div class="info">{{bookInUse}}</div>
+    <div class="info">
+      <div *ngFor="let book of bookInUse">{{book.title}}</div>
+    </div>
   </div>
 </div>

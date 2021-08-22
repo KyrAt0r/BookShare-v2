@@ -33,7 +33,6 @@ export class StarRatingComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit(): void {
     this.starControl = new FormControl(this.valStar);
-    console.log(this.valStar);
     this.starControl.valueChanges.subscribe((val) => {
       if (this.onChange) {
         this.onChange(val);

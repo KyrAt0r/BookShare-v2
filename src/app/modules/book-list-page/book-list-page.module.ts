@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { BookListPageComponent } from './components/book-list-page/book-list-page.component';
-import { BookListPageRoutingModule } from './book-list-page-routing.module';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {BookListPageComponent} from './components/book-list-page/book-list-page.component';
+import {BookListPageRoutingModule} from './book-list-page-routing.module';
 import {MatCardModule} from '@angular/material/card';
 import {BookCardModule} from '../../shared/modules/book-card/book-card.module';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -15,18 +15,13 @@ import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
-    BookListPageComponent
+    BookListPageComponent,
   ],
-    imports: [
-        CommonModule,
-        BookListPageRoutingModule,
-        MatCardModule,
-        BookCardModule,
-        MatFormFieldModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatInputModule,
-        MatSortModule
-    ]
+  imports: [
+    CommonModule,
+    BookListPageRoutingModule,
+    BookCardModule,
+  ]
 })
-export class BookListPageModule { }
+export class BookListPageModule {
+}

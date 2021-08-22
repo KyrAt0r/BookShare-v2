@@ -1,6 +1,6 @@
 [
   {
-    "id": 0,
+    "id": "56795d5d-1f4c-4b04-9c7d-e679c84ecce4",
     "email": "vadim@m.com",
     "userName": "Vadim",
     "password": "Vadim",
@@ -10,7 +10,7 @@
     ]
   },
   {
-    "id": 1,
+    "id": "a4857205-a69e-46d0-919e-687efbf36c61",
     "email": "yura@m.com",
     "userName": "Yura",
     "password": "Yura",
@@ -20,7 +20,7 @@
     ]
   },
   {
-    "id": 2,
+    "id": "0dd85812-cb2e-41c1-978a-1ba6dfb59f38",
     "email": "god@m.com",
     "userName": "God",
     "password": "God",
@@ -30,17 +30,17 @@
     ]
   },
   {
-    "id": 3,
+    "id": "d772d39e-8490-43df-8a66-be801a609a92",
     "email": "admin@m",
     "userName": "admin",
     "password": "admin",
     "role": "admin",
     "bookInUse":[
-      0, 1, 2
+      "0", "1"
     ]
   },
   {
-    "id": 4,
+    "id": "edb5f23c-5001-4a20-a03f-ccec469c5b85",
     "email": "user374@m",
     "userName": "user374",
     "password": "user374",
@@ -48,7 +48,7 @@
     "bookInUse": ""
   },
   {
-    "id": 5,
+    "id": "923c5166-d820-4eec-a8a7-00e8e873e632",
     "email": "KKKK@mail.com",
     "userName": "KKKKuser",
     "password": "KKKK",
@@ -56,7 +56,7 @@
     "bookInUse": ""
   },
   {
-    "id": 6,
+    "id": "4064bf5c-ca15-4ed5-96e8-f5f7ab0da9f2",
     "email": "SadLion@gmail.com",
     "userName": "SadLion",
     "password": "SadLion",
@@ -64,7 +64,7 @@
     "bookInUse": ""
   },
   {
-    "id": 7,
+    "id": "2dd2282a-d7eb-4369-9eef-6927513f8f11",
     "email": "GGman@m",
     "userName": "GGman",
     "password": "GGman",
@@ -72,7 +72,7 @@
     "bookInUse": ""
   },
   {
-    "id": 8,
+    "id": "605243b5-76c2-4927-8894-fc473eef174d",
     "email": "uSer2312@m",
     "userName": "uSer2312",
     "password": "uSer2312",
@@ -80,7 +80,7 @@
     "bookInUse": ""
   },
   {
-    "id": 9,
+    "id": "8fc807a7-1eec-423f-b614-e0ae8be069ba",
     "email": "uSer@m",
     "userName": "uSer",
     "password": "uSer",
@@ -88,7 +88,7 @@
     "bookInUse": ""
   },
   {
-    "id": 10,
+    "id": "9f5ee2bb-b134-4691-abab-822c28b443fe",
     "email": "user100@m",
     "userName": "user100",
     "password": "user100",
@@ -96,7 +96,7 @@
     "bookInUse": ""
   },
   {
-    "id": 11,
+    "id": "b6157290-0e76-467a-b267-2a1aed956ce1",
     "email": "user312@m",
     "userName": "user312",
     "password": "user312",
@@ -104,7 +104,7 @@
     "bookInUse": ""
   },
   {
-    "id": 12,
+    "id": "555b352b-a556-451f-aee8-425afd6e780f",
     "email": "user3@m",
     "userName": "user3",
     "password": "user3",

@@ -32,7 +32,7 @@ export class AuthenticationLoginComponent implements OnDestroy {
       .subscribe(data => {
         if (data) {
           const redirectTo = this.route.snapshot.queryParams.redirectTo;
-          const urlTree = this.router.createUrlTree(redirectTo ? [redirectTo] : []);
+          const urlTree = this.router.createUrlTree(redirectTo ? [redirectTo] : ['']);
           this.router.navigateByUrl(urlTree);
         } else {
           this.errMessage = 'Пользователь не найден или неверный пароль';
