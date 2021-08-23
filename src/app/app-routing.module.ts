@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {RouterLink, RouterModule, Routes} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {AppShellComponent} from './components/app-shell/app-shell.component';
 import {AuthGuard} from './core/guards/auth.guard';
