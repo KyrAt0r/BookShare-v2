@@ -5,9 +5,9 @@ import {Subscription} from 'rxjs';
 import {MatSort} from '@angular/material/sort';
 import {FormControl, FormGroup} from '@angular/forms';
 import {SelectionModel} from '@angular/cdk/collections';
-import {FilteredColumns} from "../../../../core/models/filtered-columns";
-import {MatDialog} from "@angular/material/dialog";
-import {KeepBookDialogComponent} from "../../../../shared/modules/keep-book-dialog/keep-book-dialog/keep-book-dialog.component";
+import {FilteredColumns} from '../../../../core/models/filtered-columns';
+import {MatDialog} from '@angular/material/dialog';
+import {KeepBookDialogComponent} from '../../../../shared/modules/keep-book-dialog/keep-book-dialog/keep-book-dialog.component';
 
 @Component({
   selector: 'app-book-list-admin',
@@ -107,7 +107,7 @@ export class BookListAdminComponent implements OnInit {
     });
   }
 
-  keepBooks(): void{
+  keepBooks(): void {
     this.dialog.open(KeepBookDialogComponent, {
       data: this.selection.selected,
     });
@@ -127,7 +127,6 @@ export class BookListAdminComponent implements OnInit {
 
     this.selection.select(...this.dataSource.filteredData);
   }
-
 
 
 }

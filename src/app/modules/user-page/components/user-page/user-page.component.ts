@@ -3,8 +3,7 @@ import {UsersService} from '../../../../core/services/users.service';
 import {Subscription} from 'rxjs';
 import {BooksServerResponse, BooksService} from '../../../../core/services/books.service';
 import {getUser} from '../../../../core/models/get-user.model';
-import {RoleEnum} from "../../../../core/models/role.models";
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-page',
@@ -44,17 +43,16 @@ export class UserPageComponent implements OnInit {
         });
   }
 
-  // tslint:disable-next-line:typedef
-  getUserBooks(ids) {
-    let books = []
+  getUserBooks(ids): void {
+    let books = [];
     this.subsBook =
       this.bookList.getBooks()
         .subscribe(data => {
           ids.forEach(id => {
-            books.push(data.find(book => book.id === id))
-          })
+            books.push(data.find(book => book.id === id));
+          });
 
-          this.bookInUse = books
+          this.bookInUse = books;
           this.cdRef.detectChanges();
         });
   }
