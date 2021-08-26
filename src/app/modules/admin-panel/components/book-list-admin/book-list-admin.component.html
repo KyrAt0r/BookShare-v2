@@ -5,8 +5,8 @@
     <mat-form-field>
       <mat-label>Поиск по:</mat-label>
       <mat-select formControlName="valueColumn" name="column">
-        <mat-option *ngFor="let column of filteredColumns" [value]="column">
-          {{column}}
+        <mat-option *ngFor="let column of filteredColumns" [value]="column.value">
+          {{column.viewValue}}
         </mat-option>
       </mat-select>
     </mat-form-field>

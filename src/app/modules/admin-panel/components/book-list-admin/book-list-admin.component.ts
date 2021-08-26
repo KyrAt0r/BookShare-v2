@@ -6,6 +6,11 @@ import {MatSort} from '@angular/material/sort';
 import {FormControl, FormGroup} from '@angular/forms';
 import {SelectionModel} from '@angular/cdk/collections';
 
+interface Columns {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-book-list-admin',
   templateUrl: './book-list-admin.component.html',
@@ -16,7 +21,11 @@ export class BookListAdminComponent implements OnInit {
   adminStatus: boolean;
   books: BooksServerResponse[] = [];
   displayedColumns: string[] = ['chek', 'title', 'publisher', 'genre', 'author', 'give'];
-  filteredColumns: string[] = ['title', 'publisher', 'genre', 'author'];
+  filteredColumns: Columns[] = [
+    {value: 'title', viewValue: 'Названиею'},
+    {value: 'publisher', viewValue: 'Издательству'},
+    {value: 'genre', viewValue: 'Жанру'},
+    {value: 'author', viewValue: 'Автору'}];
   dataSource = new MatTableDataSource<BooksServerResponse>(this.books);
   selection = new SelectionModel<BooksServerResponse>(true, []);
   genres: GenresResponse[] = [];
