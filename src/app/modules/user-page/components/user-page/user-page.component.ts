@@ -3,6 +3,8 @@ import {UsersService} from '../../../../core/services/users.service';
 import {Subscription} from 'rxjs';
 import {BooksServerResponse, BooksService} from '../../../../core/services/books.service';
 import {getUser} from '../../../../shared/models/get-user.model';
+import {RoleEnum} from "../../../../core/models/role.models";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user-page',
@@ -11,17 +13,22 @@ import {getUser} from '../../../../shared/models/get-user.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserPageComponent implements OnInit {
-  id: number = Number(localStorage.getItem('id'));
+  id: string = localStorage.getItem('id');
   name: string;
   role: string;
   email: string;
-  bookIdInUse: [];
+  bookIdInUse: string[];
   bookInUse: BooksServerResponse[];
 
   private subs: Subscription;
   private subsBook: Subscription;
 
-  constructor(private usersInfo: UsersService, private cdRef: ChangeDetectorRef, private bookList: BooksService) {
+  constructor(
+    private router: Router,
+    private usersInfo: UsersService,
+    private cdRef: ChangeDetectorRef,
+    private bookList: BooksService
+  ) {
   }
 
   ngOnInit(): void {
@@ -33,25 +40,27 @@ export class UserPageComponent implements OnInit {
           this.bookIdInUse = getUser(data, this.id).bookInUse;
           this.getUserBooks(this.bookIdInUse);
           this.email = getUser(data, this.id).email;
-          this.cdRef.markForCheck();
+          this.cdRef.detectChanges();
         });
   }
 
   // tslint:disable-next-line:typedef
-  getUserBooks(id) {
+  getUserBooks(ids) {
+    let books = []
     this.subsBook =
       this.bookList.getBooks()
         .subscribe(data => {
-          console.log(id);
-          this.bookInUse = data.filter(book => book.id === id[0]);
-          console.log(this.bookInUse);
+          ids.forEach(id => {
+            books.push(data.find(book => book.id === id))
+          })
+
+          this.bookInUse = books
           this.cdRef.detectChanges();
         });
   }
 
 
-  // tslint:disable-next-line:typedef use-lifecycle-interface
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.subs) {
       this.subs.unsubscribe();
     }

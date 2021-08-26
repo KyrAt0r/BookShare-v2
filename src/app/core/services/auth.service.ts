@@ -11,18 +11,17 @@ import {User} from '../models/user.models';
 
 export class AuthService {
   isAuth: boolean;
+  currentUserRole: string;
 
   constructor(private http: HttpClient) {
   }
 
-
   logIn(email: string, password: string): Observable<boolean> {
     return this.http.get<User[]>('./assets/data/users.json')
       .pipe(
-        delay(1000),
         map(data => {
             this.isAuth = data.some(user => user.email === email && user.password === password);
-            if (this.isAuth){
+            if (this.isAuth) {
               localStorage.setItem('authStatus', String(true));
               localStorage.setItem('userName', String(this.getUserInfo(data, email).userName));
               localStorage.setItem('id', String(this.getUserInfo(data, email).id));
@@ -45,8 +44,22 @@ export class AuthService {
   }
 
   // tslint:disable-next-line:typedef
-  getUserInfo(data, email) {
+  getUserInfo(data: User[], email: string) {
     return data.find(user => user.email === email);
+  }
+
+  getUserRole(role: string): Promise<boolean> {
+    let userRole = this.http.get<User[]>('./assets/data/users.json').pipe(
+      map(
+        data => {
+          return data.some(user => user.role === role && user.id === localStorage.getItem('id'));
+        }
+      )
+    )
+
+    return userRole.toPromise().then(data => {
+      return data;
+    })
   }
 
 }

@@ -19,7 +19,7 @@ export class AppShellComponent implements OnInit {
   booksInUse: number;
 
   private userSubs: Subscription;
-  private id: number = Number(localStorage.getItem('id'));
+  private id: string = localStorage.getItem('id');
 
   constructor(
     private authService: AuthService,

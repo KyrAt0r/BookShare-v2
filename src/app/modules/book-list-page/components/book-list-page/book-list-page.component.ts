@@ -36,14 +36,7 @@ export class BookListPageComponent implements OnInit {
   @ViewChild('roleAdminTemplate', {static: true}) roleAdminTemplateRef: TemplateRef<any>;
 
   ngOnInit(): void {
-    this.adminService.adminStatus().subscribe(data => {
-      this.adminStatus = data;
-      if (data) {
-        this.loadBoksForAdmin();
-      } else {
-        this.loadBooks();
-      }
-    });
+    this.loadBooks();
 
     //this.subsGenre =
     //  this.bookList.getGenres()
@@ -55,29 +48,11 @@ export class BookListPageComponent implements OnInit {
 
   }
 
-  loadTemplate(): TemplateRef<any> {
-    if (this.adminStatus) {
-      return this.roleAdminTemplateRef;
-    }
-    return this.roleUserTemplateRef;
-  }
-
   loadBooks() {
     this.subsBooks =
       this.bookList.getBooks()
         .subscribe(data => {
           this.books = data;
-          this.cdRef.detectChanges();
-        });
-  }
-
-  loadBoksForAdmin() {
-    this.subsBooks =
-      this.bookList.getBooks()
-        .subscribe(data => {
-          this.dataSource = new MatTableDataSource(data);
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
           this.cdRef.detectChanges();
         });
   }

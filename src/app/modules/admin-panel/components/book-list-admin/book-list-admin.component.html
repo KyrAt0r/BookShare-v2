@@ -1,0 +1,61 @@
+<mat-toolbar-row>
+  <button mat-stroked-button>Выдать выбраные</button>
+  <button mat-stroked-button color="warn">Добавить книгу</button>
+  <form [formGroup]="filter">
+    <mat-form-field>
+      <mat-label>Поиск по:</mat-label>
+      <mat-select formControlName="column" name="column">
+        <mat-option *ngFor="let column of displayedColumns" [value]="column">
+          {{column}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Поиск</mat-label>
+      <!--<input matInput (keyup)="applyFilter($event)" placeholder="" #input>-->
+      <input matInput formControlName="valueFilter">
+    </mat-form-field>
+  </form>
+</mat-toolbar-row>
+<div class="example-container">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="chek">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox></mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let books">
+        <mat-checkbox></mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Название книги</th>
+      <td mat-cell *matCellDef="let books"> {{books.title}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="publisher">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Издание</th>
+      <td mat-cell *matCellDef="let books"> {{books.publisher}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="genre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Жанр</th>
+      <td mat-cell *matCellDef="let books"> {{books.genre}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="author">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Автор</th>
+      <td mat-cell *matCellDef="let books"> {{books.author}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="give" [stickyEnd]>
+      <th mat-header-cell *matHeaderCellDef> Выдать книгу</th>
+      <td mat-cell *matCellDef="let books">
+        <button mat-raised-button color="primary" class="button-give" (click)="giveBook(books.id)">+</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

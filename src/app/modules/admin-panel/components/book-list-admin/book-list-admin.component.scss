@@ -1,0 +1,59 @@
+.example-container{
+  height: 70vh;
+  overflow: auto;
+
+  table {
+    width: 100%;
+
+    .mat-column-chek{
+      border-right: 1px solid rgb(0 0 0 / 12%);
+      padding: 12px 0;
+      width: 64px;
+      text-align: center;
+    }
+
+    .mat-column-title{
+      padding-left: 24px;
+    }
+
+    .mat-column-publisher{
+      border-left: 1px solid rgb(0 0 0 / 12%);
+      padding: 0 24px;
+    }
+
+    .mat-column-give{
+      padding: 12px 24px 12px 24px;
+      width: 64px;
+      text-align: center;
+      border-left: 1px solid rgb(0 0 0 / 12%);
+
+      button.button-give{
+        max-width: 36px;
+        max-height: 36px;
+      }
+    }
+  }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #969696;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #818181;
+  border-radius: 10px;
+}

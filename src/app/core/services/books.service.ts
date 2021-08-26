@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 
 export interface BooksServerResponse {
-  id: number;
+  id: string;
   title: string;
   author: string;
   genre: number;
