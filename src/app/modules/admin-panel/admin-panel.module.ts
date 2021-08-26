@@ -17,6 +17,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatSelectModule} from "@angular/material/select";
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 
@@ -27,22 +28,23 @@ import {MatSelectModule} from "@angular/material/select";
     AdminPanelComponent,
     UserListPageComponent
   ],
-    imports: [
-        CommonModule,
-        AdminPanelRoutingModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatInputModule,
-        MatSortModule,
-        ReactiveFormsModule,
-        MatButtonModule,
-        MatToolbarModule,
-        MatCheckboxModule,
-        MatMenuModule,
-        MatSelectModule,
-        FormsModule
-    ]
+  imports: [
+    CommonModule,
+    AdminPanelRoutingModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatInputModule,
+    MatSortModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatCheckboxModule,
+    MatMenuModule,
+    MatSelectModule,
+    FormsModule,
+    MatBadgeModule
+  ]
 })
 export class AdminPanelModule { }

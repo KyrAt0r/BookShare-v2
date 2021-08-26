@@ -4,15 +4,14 @@
   <form [formGroup]="filter">
     <mat-form-field>
       <mat-label>Поиск по:</mat-label>
-      <mat-select formControlName="column" name="column">
-        <mat-option *ngFor="let column of displayedColumns" [value]="column">
+      <mat-select formControlName="valueColumn" name="column">
+        <mat-option *ngFor="let column of filteredColumns" [value]="column">
           {{column}}
         </mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Поиск</mat-label>
-      <!--<input matInput (keyup)="applyFilter($event)" placeholder="" #input>-->
       <input matInput formControlName="valueFilter">
     </mat-form-field>
   </form>
@@ -21,10 +20,20 @@
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="chek">
       <th mat-header-cell *matHeaderCellDef>
-        <mat-checkbox></mat-checkbox>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                      [matBadge]="selection.selected.length"
+                      [matBadgeHidden]="selection.selected.length ===0"
+                      matBadgeSize="small"
+        s>
+        </mat-checkbox>
       </th>
       <td mat-cell *matCellDef="let books">
-        <mat-checkbox></mat-checkbox>
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(books) : null"
+                      [checked]="selection.isSelected(books)">
+        </mat-checkbox>
       </td>
     </ng-container>
 

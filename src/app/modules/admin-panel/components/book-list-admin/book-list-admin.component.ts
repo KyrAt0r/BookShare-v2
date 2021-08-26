@@ -1,10 +1,10 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
-import {BooksServerResponse, BooksService, GenresResponse} from "../../../../core/services/books.service";
-import {MatTableDataSource} from "@angular/material/table";
-import {Subscription} from "rxjs";
-import {MatPaginator} from "@angular/material/paginator";
-import {MatSort} from "@angular/material/sort";
-import {FormControl, FormGroup} from "@angular/forms";
+import {BooksServerResponse, BooksService, GenresResponse} from '../../../../core/services/books.service';
+import {MatTableDataSource} from '@angular/material/table';
+import {Subscription} from 'rxjs';
+import {MatSort} from '@angular/material/sort';
+import {FormControl, FormGroup} from '@angular/forms';
+import {SelectionModel} from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-book-list-admin',
@@ -15,15 +15,25 @@ import {FormControl, FormGroup} from "@angular/forms";
 export class BookListAdminComponent implements OnInit {
   adminStatus: boolean;
   books: BooksServerResponse[] = [];
-  displayedColumns: string[] = ['chek','title', 'publisher', 'genre', 'author', 'give'];
+  displayedColumns: string[] = ['chek', 'title', 'publisher', 'genre', 'author', 'give'];
+  filteredColumns: string[] = ['title', 'publisher', 'genre', 'author'];
   dataSource = new MatTableDataSource<BooksServerResponse>(this.books);
-
-  filter = new FormGroup({
-    column: new FormControl(),
-    valueFilter: new FormControl('')
-  })
+  selection = new SelectionModel<BooksServerResponse>(true, []);
   genres: GenresResponse[] = [];
   genre: string;
+  selectionId: string[];
+
+  filter = new FormGroup({
+    valueColumn: new FormControl(),
+    valueFilter: new FormControl('')
+  });
+
+  filterValues = {
+    title: '',
+    publisher: '',
+    genre: '',
+    author: ''
+  };
 
   private subsBooks: Subscription;
   private subsGenre: Subscription;
@@ -39,23 +49,71 @@ export class BookListAdminComponent implements OnInit {
         .subscribe(data => {
           this.dataSource = new MatTableDataSource(data);
           this.dataSource.sort = this.sort;
+          this.dataSource.filterPredicate = this.tableFilter();
           this.cdRef.detectChanges();
         });
   }
 
   ngOnInit(): void {
     this.filter.valueChanges.subscribe(value => {
-      console.log(value)
-    })
+      this.filterValues.title = '';
+      this.filterValues.publisher = '';
+      this.filterValues.genre = '';
+      this.filterValues.author = '';
+
+      switch (value.valueColumn) {
+        case 'title':
+          this.filterValues.title = value.valueFilter;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+          break;
+
+        case 'publisher':
+          this.filterValues.publisher = value.valueFilter;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+          break;
+
+        case 'genre':
+          this.filterValues.genre = value.valueFilter;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+          break;
+
+        case 'author':
+          this.filterValues.author = value.valueFilter;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+          break;
+      }
+    });
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    console.log(this.dataSource)
+  tableFilter(): (data: BooksServerResponse, filter: string) => boolean {
+    return function(data: BooksServerResponse, filter: string): boolean {
+      const search = JSON.parse(filter);
+      return data.title.toString().toLowerCase().indexOf(search.title.toLowerCase()) !== -1
+        && data.id.toString().toLowerCase().indexOf(search.publisher.toLowerCase()) !== -1
+        && data.genre.toString().toLowerCase().indexOf(search.genre.toLowerCase()) !== -1
+        && data.author.toString().toLowerCase().indexOf(search.author.toLowerCase()) !== -1;
+    };
   }
 
-  giveBook(id: string){
-    console.log(id)
+  giveBook(id: string) {
+    console.log(id);
   }
+
+  isAllSelected(): boolean {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.filteredData.length;
+    return numSelected === numRows;
+  }
+
+  masterToggle(): void {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+
+    this.selection.select(...this.dataSource.filteredData);
+  }
+
+
+
 }
