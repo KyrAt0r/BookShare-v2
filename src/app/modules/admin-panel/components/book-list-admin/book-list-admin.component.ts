@@ -22,7 +22,7 @@ export class BookListAdminComponent implements OnInit {
   books: BooksServerResponse[] = [];
   displayedColumns: string[] = ['chek', 'title', 'publisher', 'genre', 'author', 'give'];
   filteredColumns: Columns[] = [
-    {value: 'title', viewValue: 'Названиею'},
+    {value: 'title', viewValue: 'Названию'},
     {value: 'publisher', viewValue: 'Издательству'},
     {value: 'genre', viewValue: 'Жанру'},
     {value: 'author', viewValue: 'Автору'}];
@@ -30,7 +30,6 @@ export class BookListAdminComponent implements OnInit {
   selection = new SelectionModel<BooksServerResponse>(true, []);
   genres: GenresResponse[] = [];
   genre: string;
-  selectionId: string[];
 
   filter = new FormGroup({
     valueColumn: new FormControl(),
@@ -45,7 +44,6 @@ export class BookListAdminComponent implements OnInit {
   };
 
   private subsBooks: Subscription;
-  private subsGenre: Subscription;
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -95,7 +93,7 @@ export class BookListAdminComponent implements OnInit {
   }
 
   tableFilter(): (data: BooksServerResponse, filter: string) => boolean {
-    return function(data: BooksServerResponse, filter: string): boolean {
+    return (data: BooksServerResponse, filter: string): boolean => {
       const search = JSON.parse(filter);
       return data.title.toString().toLowerCase().indexOf(search.title.toLowerCase()) !== -1
         && data.id.toString().toLowerCase().indexOf(search.publisher.toLowerCase()) !== -1
@@ -104,8 +102,12 @@ export class BookListAdminComponent implements OnInit {
     };
   }
 
-  giveBook(id: string) {
+  giveBook(id: string): void {
     console.log(id);
+  }
+
+  keepBooks(): void{
+    console.log(this.selection.selected);
   }
 
   isAllSelected(): boolean {

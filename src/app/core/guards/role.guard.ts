@@ -1,12 +1,10 @@
 import {Injectable} from '@angular/core';
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
-import {AuthService} from "../services/auth.service";
-
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
+import {AuthService} from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class RoleGuard implements CanActivate {
 
   constructor(
@@ -15,21 +13,15 @@ export class RoleGuard implements CanActivate {
   ) {
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (!this.authService.getUserRole(route.data.role)) {
-      this.router.navigate(['']);
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean | UrlTree> {
+    return this.authService.getUserRole(route.data.role).then(data => {
+      if (data === true) {
+        return true;
+      }
+      this.router.navigate(['/admin']);
       return false;
-    }
-    return true;
+    });
+
   }
 
-  // return this.usersList.getUsers().pipe(map(data => {
-  //     if (data.some(user => user.id === localStorage.getItem('id') && user.role === RoleEnum.admin)){
-  //       return true
-  //     } else {
-  //       this.router.navigate(['/home']);
-  //     }
-  //   }
-  // ));
-  // }
 }

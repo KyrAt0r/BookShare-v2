@@ -4,7 +4,7 @@
     "email": "vadim@m.com",
     "userName": "Vadim",
     "password": "Vadim",
-    "role": "",
+    "role": "user",
     "bookInUse": [
       "0", "1", "2"
     ]
@@ -14,7 +14,7 @@
     "email": "yura@m.com",
     "userName": "Yura",
     "password": "Yura",
-    "role": "",
+    "role": "user",
     "bookInUse": [
       "0", "1", "2"
     ]
@@ -44,7 +44,7 @@
     "email": "user374@m",
     "userName": "user374",
     "password": "user374",
-    "role": "",
+    "role": "user",
     "bookInUse": ""
   },
   {
@@ -52,7 +52,7 @@
     "email": "KKKK@mail.com",
     "userName": "KKKKuser",
     "password": "KKKK",
-    "role": "",
+    "role": "user",
     "bookInUse": ""
   },
   {
@@ -60,7 +60,7 @@
     "email": "SadLion@gmail.com",
     "userName": "SadLion",
     "password": "SadLion",
-    "role": "",
+    "role": "user",
     "bookInUse": ""
   },
   {
@@ -68,7 +68,7 @@
     "email": "GGman@m",
     "userName": "GGman",
     "password": "GGman",
-    "role": "",
+    "role": "user",
     "bookInUse": ""
   },
   {
@@ -76,7 +76,7 @@
     "email": "uSer2312@m",
     "userName": "uSer2312",
     "password": "uSer2312",
-    "role": "",
+    "role": "user",
     "bookInUse": ""
   },
   {
@@ -84,7 +84,7 @@
     "email": "uSer@m",
     "userName": "uSer",
     "password": "uSer",
-    "role": "",
+    "role": "user",
     "bookInUse": ""
   },
   {
@@ -92,7 +92,7 @@
     "email": "user100@m",
     "userName": "user100",
     "password": "user100",
-    "role": "",
+    "role": "user",
     "bookInUse": ""
   },
   {
@@ -100,7 +100,7 @@
     "email": "user312@m",
     "userName": "user312",
     "password": "user312",
-    "role": "",
+    "role": "user",
     "bookInUse": ""
   },
   {
@@ -108,7 +108,7 @@
     "email": "user3@m",
     "userName": "user3",
     "password": "user3",
-    "role": "",
+    "role": "user",
     "bookInUse": ""
   }
 ]

@@ -4,9 +4,9 @@ import {NotFoundComponent} from './components/not-found/not-found.component';
 import {AppShellComponent} from './components/app-shell/app-shell.component';
 import {AuthGuard} from './core/guards/auth.guard';
 import {LoginPageGuard} from './core/guards/login-page.guard';
-import {RoleGuard} from "./core/guards/role.guard";
-import {RoleEnum} from "./core/models/role.models";
-import {AdminGuard} from "./core/guards/admin.guard";
+import {AdminGuard} from './core/guards/admin.guard';
+import {RoleEnum} from './core/models/role.models';
+import {RoleGuard} from './core/guards/role.guard';
 
 const routes: Routes = [
   {
@@ -25,9 +25,7 @@ const routes: Routes = [
       {
         path: 'book-list',
         loadChildren: () => import('./modules/book-list-page/book-list-page.module').then(m => m.BookListPageModule),
-        canActivate: [RoleGuard],
         data: {
-          role: RoleEnum.user,
           preload: true,
           title: 'Список книг',
         },
@@ -35,7 +33,7 @@ const routes: Routes = [
       {
         path: 'user',
         loadChildren: () => import('./modules/user-page/user-page.module').then(m => m.UserPageModule),
-        canActivate: [RoleGuard, AdminGuard],
+        canActivate: [RoleGuard],
         data: {
           role: RoleEnum.user,
           preload: true,
@@ -45,7 +43,7 @@ const routes: Routes = [
       {
         path: 'admin',
         loadChildren: () => import('./modules/admin-panel/admin-panel.module').then(m => m.AdminPanelModule),
-        canActivate: [RoleGuard],
+        canActivate: [AdminGuard],
         data: {
           role: RoleEnum.admin,
           preload: true,
