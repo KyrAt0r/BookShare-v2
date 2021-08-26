@@ -5,11 +5,9 @@ import {Subscription} from 'rxjs';
 import {MatSort} from '@angular/material/sort';
 import {FormControl, FormGroup} from '@angular/forms';
 import {SelectionModel} from '@angular/cdk/collections';
-
-interface Columns {
-  value: string;
-  viewValue: string;
-}
+import {FilteredColumns} from "../../../../core/models/filtered-columns";
+import {MatDialog} from "@angular/material/dialog";
+import {KeepBookDialogComponent} from "../../../../shared/modules/keep-book-dialog/keep-book-dialog/keep-book-dialog.component";
 
 @Component({
   selector: 'app-book-list-admin',
@@ -21,7 +19,7 @@ export class BookListAdminComponent implements OnInit {
   adminStatus: boolean;
   books: BooksServerResponse[] = [];
   displayedColumns: string[] = ['chek', 'title', 'publisher', 'genre', 'author', 'give'];
-  filteredColumns: Columns[] = [
+  filteredColumns: FilteredColumns[] = [
     {value: 'title', viewValue: 'Названию'},
     {value: 'publisher', viewValue: 'Издательству'},
     {value: 'genre', viewValue: 'Жанру'},
@@ -50,6 +48,7 @@ export class BookListAdminComponent implements OnInit {
   constructor(
     private bookList: BooksService,
     private cdRef: ChangeDetectorRef,
+    public dialog: MatDialog
   ) {
     this.subsBooks =
       this.bookList.getBooks()
@@ -102,12 +101,16 @@ export class BookListAdminComponent implements OnInit {
     };
   }
 
-  giveBook(id: string): void {
-    console.log(id);
+  giveBook(book: BooksServerResponse): void {
+    this.dialog.open(KeepBookDialogComponent, {
+      data: [book],
+    });
   }
 
   keepBooks(): void{
-    console.log(this.selection.selected);
+    this.dialog.open(KeepBookDialogComponent, {
+      data: this.selection.selected,
+    });
   }
 
   isAllSelected(): boolean {

@@ -6,7 +6,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {LOGO_BOOKS, USER_IMG} from 'src/app/core/const/icons';
 import {UsersService} from '../../core/services/users.service';
 import {Subscription} from 'rxjs';
-import {getUser} from '../../shared/models/get-user.model';
+import {getUser} from '../../core/models/get-user.model';
 
 @Component({
   selector: 'app-app-shell',

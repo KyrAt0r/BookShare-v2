@@ -1,5 +1,5 @@
 <mat-toolbar-row>
-  <button mat-stroked-button (click)="keepBooks()">Выдать выбраные</button>
+  <button mat-stroked-button (click)="keepBooks()" [disabled]="selection.selected.length ===0">Выдать выбраные</button>
   <button mat-stroked-button color="warn">Добавить книгу</button>
   <form [formGroup]="filter">
     <mat-form-field>

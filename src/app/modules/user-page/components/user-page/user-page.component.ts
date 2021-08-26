@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@an
 import {UsersService} from '../../../../core/services/users.service';
 import {Subscription} from 'rxjs';
 import {BooksServerResponse, BooksService} from '../../../../core/services/books.service';
-import {getUser} from '../../../../shared/models/get-user.model';
+import {getUser} from '../../../../core/models/get-user.model';
 import {RoleEnum} from "../../../../core/models/role.models";
 import {Router} from "@angular/router";
 
