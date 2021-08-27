@@ -8,6 +8,8 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {FilteredColumns} from '../../../../core/models/filtered-columns';
 import {MatDialog} from '@angular/material/dialog';
 import {KeepBookDialogComponent} from '../../../../shared/modules/keep-book-dialog/keep-book-dialog/keep-book-dialog.component';
+import {AddBookDialogComponent} from '../../../../shared/modules/add-book-dialog/add-book-dialog.component';
+import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-book-list-admin',
@@ -43,6 +45,7 @@ export class BookListAdminComponent implements OnInit {
 
   private subsBooks: Subscription;
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
@@ -55,6 +58,7 @@ export class BookListAdminComponent implements OnInit {
         .subscribe(data => {
           this.dataSource = new MatTableDataSource(data);
           this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
           this.dataSource.filterPredicate = this.tableFilter();
           this.cdRef.detectChanges();
         });
@@ -111,6 +115,10 @@ export class BookListAdminComponent implements OnInit {
     this.dialog.open(KeepBookDialogComponent, {
       data: this.selection.selected,
     });
+  }
+
+  addBook(){
+    this.dialog.open(AddBookDialogComponent)
   }
 
   isAllSelected(): boolean {

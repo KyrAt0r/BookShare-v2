@@ -1,9 +1,12 @@
 .example-container{
-  height: 70vh;
   overflow: auto;
 
   table {
     width: 100%;
+
+    .mat-header-cell{
+      height: 50px;
+    }
 
     .mat-column-chek{
       border-right: 1px solid rgb(0 0 0 / 12%);

@@ -10,26 +10,31 @@ import {MatButtonModule} from '@angular/material/button';
 import {BookCardComponent} from './modules/book-card/components/book-card/book-card.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
+import {AddBookDialogComponent} from './modules/add-book-dialog/add-book-dialog.component';
 
 
 @NgModule({
   declarations: [
     StarRatingComponent,
+    BookCardComponent,
+
     KeepBookDialogComponent,
-    BookCardComponent
+    AddBookDialogComponent
   ],
   entryComponents: [
-    KeepBookDialogComponent
+    KeepBookDialogComponent,
+    AddBookDialogComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
+
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatCardModule,
-    FormsModule,
     MatSelectModule,
   ],
   exports: [
