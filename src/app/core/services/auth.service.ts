@@ -49,17 +49,14 @@ export class AuthService {
   }
 
   getUserRole(role: string): Promise<boolean> {
-    let userRole = this.http.get<User[]>('./assets/data/users.json').pipe(
+    return this.http.get<User[]>('./assets/data/users.json').pipe(
       map(
         data => {
           return data.some(user => user.role === role && user.id === localStorage.getItem('id'));
         }
       )
-    )
-
-    return userRole.toPromise().then(data => {
+    ).toPromise().then(data => {
       return data;
-    })
+    });
   }
-
 }

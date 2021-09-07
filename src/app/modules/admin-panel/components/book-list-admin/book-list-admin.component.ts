@@ -1,7 +1,7 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {BooksServerResponse, BooksService, GenresResponse} from '../../../../core/services/books.service';
 import {MatTableDataSource} from '@angular/material/table';
-import {Subscription} from 'rxjs';
+import {Subscription, SubscriptionLike} from 'rxjs';
 import {MatSort} from '@angular/material/sort';
 import {FormControl, FormGroup} from '@angular/forms';
 import {SelectionModel} from '@angular/cdk/collections';
@@ -17,7 +17,7 @@ interface Columns {
   styleUrls: ['./book-list-admin.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BookListAdminComponent implements OnInit {
+export class BookListAdminComponent implements OnInit, OnDestroy {
   adminStatus: boolean;
   books: BooksServerResponse[] = [];
   displayedColumns: string[] = ['chek', 'title', 'publisher', 'genre', 'author', 'give'];
@@ -30,6 +30,8 @@ export class BookListAdminComponent implements OnInit {
   selection = new SelectionModel<BooksServerResponse>(true, []);
   genres: GenresResponse[] = [];
   genre: string;
+  subscriptions: SubscriptionLike[] = [];
+  allComplete: boolean;
 
   filter = new FormGroup({
     valueColumn: new FormControl(),
@@ -43,22 +45,20 @@ export class BookListAdminComponent implements OnInit {
     author: ''
   };
 
-  private subsBooks: Subscription;
-
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private bookList: BooksService,
     private cdRef: ChangeDetectorRef,
   ) {
-    this.subsBooks =
+    this.subscriptions.push(
       this.bookList.getBooks()
-        .subscribe(data => {
-          this.dataSource = new MatTableDataSource(data);
-          this.dataSource.sort = this.sort;
-          this.dataSource.filterPredicate = this.tableFilter();
-          this.cdRef.detectChanges();
-        });
+      .subscribe(data => {
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.sort = this.sort;
+        this.dataSource.filterPredicate = this.tableFilter();
+        this.cdRef.detectChanges();
+      }));
   }
 
   ngOnInit(): void {
@@ -90,6 +90,12 @@ export class BookListAdminComponent implements OnInit {
           break;
       }
     });
+  }
+
+  ngOnDestroy(): void{
+    this.subscriptions.forEach(
+      (subscription) => subscription.unsubscribe());
+    this.subscriptions = [];
   }
 
   tableFilter(): (data: BooksServerResponse, filter: string) => boolean {

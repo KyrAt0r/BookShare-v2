@@ -24,7 +24,7 @@
         svgIcon="user"
         class="header__personal-info__user-name-container__logo-user"
         [matBadge]="booksInUse"
-        [matBadgeHidden]="booksInUse === 0"
+        [matBadgeHidden]="booksInUse === 0 || userRole === 'admin'"
         matBadgeSize="small"
         matBadgeColor="warn"
       ></mat-icon>
