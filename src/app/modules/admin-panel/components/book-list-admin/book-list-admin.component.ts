@@ -51,6 +51,10 @@ export class BookListAdminComponent implements OnInit, OnDestroy {
     private bookList: BooksService,
     private cdRef: ChangeDetectorRef,
   ) {
+
+  }
+
+  ngOnInit(): void {
     this.subscriptions.push(
       this.bookList.getBooks()
         .subscribe(data => {
@@ -59,9 +63,7 @@ export class BookListAdminComponent implements OnInit, OnDestroy {
           this.dataSource.filterPredicate = this.tableFilter();
           this.cdRef.detectChanges();
         }));
-  }
 
-  ngOnInit(): void {
     this.filter.valueChanges.subscribe(value => {
       this.filterValues.title = '';
       this.filterValues.publisher = '';
