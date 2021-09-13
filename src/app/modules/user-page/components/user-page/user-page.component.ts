@@ -1,9 +1,9 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {UsersService} from '../../../../core/services/users.service';
-import {SubscriptionLike} from 'rxjs';
-import {BooksServerResponse, BooksService} from '../../../../core/services/books.service';
-import {getUser} from '../../../../shared/models/get-user.model';
-import {Router} from '@angular/router';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { UsersService } from '../../../../core/services/users.service';
+import { combineLatest, SubscriptionLike } from 'rxjs';
+import { BooksServerResponse, BooksService } from '../../../../core/services/books.service';
+import { getUser } from '../../../../shared/models/get-user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-page',
@@ -30,15 +30,24 @@ export class UserPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions.push(
-      this.usersInfo.getUsers()
-        .subscribe(data => {
-          this.name = getUser(data, this.id).userName;
-          this.role = getUser(data, this.id).role;
-          this.bookIdInUse = getUser(data, this.id).bookInUse;
-          this.getUserBooks(this.bookIdInUse);
-          this.email = getUser(data, this.id).email;
+      combineLatest([this.usersInfo.getUsers(), this.bookList.getBooks()]).subscribe(
+        ([usersInfo, bookList]: any) => {
+          this.name = getUser(usersInfo, this.id).userName;
+          this.role = getUser(usersInfo, this.id).role;
+          this.bookIdInUse = getUser(usersInfo, this.id).bookInUse;
+          const i = [];
+          this.bookIdInUse?.forEach(id => {
+            debugger
+            console.log(bookList.find(book => book.id === id));
+            i.push(bookList.find(book => book.id === id));
+            console.log(i);
+            this.bookInUse = i;
+          });
+          console.log(this.bookInUse);
+          this.email = getUser(usersInfo, this.id).email;
           this.cdRef.detectChanges();
-        }));
+        }
+      ));
   }
 
   ngOnDestroy(): void {
@@ -46,18 +55,4 @@ export class UserPageComponent implements OnInit, OnDestroy {
       (subscription) => subscription.unsubscribe());
     this.subscriptions = [];
   }
-
-  getUserBooks(ids) {
-    const books = [];
-    this.subscriptions.push(
-      this.bookList.getBooks()
-        .subscribe(data => {
-          ids.forEach(id => {
-            books.push(data.find(book => book.id === id));
-          });
-          this.bookInUse = books;
-          this.cdRef.detectChanges();
-        }));
-  }
-
 }

@@ -64,7 +64,7 @@ export class AppShellComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void{
+  ngOnDestroy(): void {
     this.subscriptions.forEach(
       (subscription) => subscription.unsubscribe());
     this.subscriptions = [];

@@ -1,10 +1,10 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {BooksServerResponse, BooksService, GenresResponse} from '../../../../core/services/books.service';
-import {MatTableDataSource} from '@angular/material/table';
-import {Subscription, SubscriptionLike} from 'rxjs';
-import {MatSort} from '@angular/material/sort';
-import {FormControl, FormGroup} from '@angular/forms';
-import {SelectionModel} from '@angular/cdk/collections';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { BooksServerResponse, BooksService, GenresResponse } from '../../../../core/services/books.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { SubscriptionLike } from 'rxjs';
+import { MatSort } from '@angular/material/sort';
+import { FormControl, FormGroup } from '@angular/forms';
+import { SelectionModel } from '@angular/cdk/collections';
 
 interface Columns {
   value: string;
@@ -53,12 +53,12 @@ export class BookListAdminComponent implements OnInit, OnDestroy {
   ) {
     this.subscriptions.push(
       this.bookList.getBooks()
-      .subscribe(data => {
-        this.dataSource = new MatTableDataSource(data);
-        this.dataSource.sort = this.sort;
-        this.dataSource.filterPredicate = this.tableFilter();
-        this.cdRef.detectChanges();
-      }));
+        .subscribe(data => {
+          this.dataSource = new MatTableDataSource(data);
+          this.dataSource.sort = this.sort;
+          this.dataSource.filterPredicate = this.tableFilter();
+          this.cdRef.detectChanges();
+        }));
   }
 
   ngOnInit(): void {
@@ -92,7 +92,7 @@ export class BookListAdminComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void{
+  ngOnDestroy(): void {
     this.subscriptions.forEach(
       (subscription) => subscription.unsubscribe());
     this.subscriptions = [];
@@ -108,11 +108,11 @@ export class BookListAdminComponent implements OnInit, OnDestroy {
     };
   }
 
-  giveBook(id: string): void {
-    console.log(id);
+  giveBook(book): void {
+    console.log(book);
   }
 
-  keepBooks(): void{
+  keepBooks(): void {
     console.log(this.selection.selected);
   }
 
@@ -130,7 +130,6 @@ export class BookListAdminComponent implements OnInit, OnDestroy {
 
     this.selection.select(...this.dataSource.filteredData);
   }
-
 
 
 }
