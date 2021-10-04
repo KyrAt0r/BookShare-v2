@@ -11,13 +11,19 @@ import {KeepBookDialogComponent} from '../../../../shared/modules/keep-book-dial
 import {AddBookDialogComponent} from '../../../../shared/modules/add-book-dialog/add-book-dialog.component';
 import {MatPaginator} from '@angular/material/paginator';
 
+interface Columns {
+  value: string;
+  viewValue: string;
+}
+
+
 @Component({
   selector: 'app-book-list-admin',
   templateUrl: './book-list-admin.component.html',
   styleUrls: ['./book-list-admin.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BookListAdminComponent implements OnInit {
+export class BookListAdminComponent implements OnInit, OnDestroy {
   adminStatus: boolean;
   books: BooksServerResponse[] = [];
   displayedColumns: string[] = ['chek', 'title', 'publisher', 'genre', 'author', 'give'];
@@ -30,6 +36,8 @@ export class BookListAdminComponent implements OnInit {
   selection = new SelectionModel<BooksServerResponse>(true, []);
   genres: GenresResponse[] = [];
   genre: string;
+  subscriptions: SubscriptionLike[] = [];
+  allComplete: boolean;
 
   filter = new FormGroup({
     valueColumn: new FormControl(),
@@ -53,7 +61,11 @@ export class BookListAdminComponent implements OnInit {
     private cdRef: ChangeDetectorRef,
     public dialog: MatDialog
   ) {
-    this.subsBooks =
+
+  }
+
+  ngOnInit(): void {
+    this.subscriptions.push(
       this.bookList.getBooks()
         .subscribe(data => {
           this.dataSource = new MatTableDataSource(data);
@@ -61,10 +73,8 @@ export class BookListAdminComponent implements OnInit {
           this.dataSource.paginator = this.paginator;
           this.dataSource.filterPredicate = this.tableFilter();
           this.cdRef.detectChanges();
-        });
-  }
+        }));
 
-  ngOnInit(): void {
     this.filter.valueChanges.subscribe(value => {
       this.filterValues.title = '';
       this.filterValues.publisher = '';
@@ -95,6 +105,12 @@ export class BookListAdminComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(
+      (subscription) => subscription.unsubscribe());
+    this.subscriptions = [];
+  }
+
   tableFilter(): (data: BooksServerResponse, filter: string) => boolean {
     return (data: BooksServerResponse, filter: string): boolean => {
       const search = JSON.parse(filter);
@@ -104,6 +120,7 @@ export class BookListAdminComponent implements OnInit {
         && data.author.toString().toLowerCase().indexOf(search.author.toLowerCase()) !== -1;
     };
   }
+
 
   giveBook(book: BooksServerResponse): void {
     this.dialog.open(KeepBookDialogComponent, {
@@ -119,6 +136,7 @@ export class BookListAdminComponent implements OnInit {
 
   addBook(){
     this.dialog.open(AddBookDialogComponent)
+
   }
 
   isAllSelected(): boolean {

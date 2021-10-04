@@ -1,9 +1,9 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {UsersService} from '../../../../core/services/users.service';
-import {Subscription} from 'rxjs';
-import {BooksServerResponse, BooksService} from '../../../../core/services/books.service';
-import {getUser} from '../../../../core/models/get-user.model';
-import {Router} from '@angular/router';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { UsersService } from '../../../../core/services/users.service';
+import { combineLatest, SubscriptionLike } from 'rxjs';
+import { BooksServerResponse, BooksService } from '../../../../core/services/books.service';
+import { getUser } from '../../../../shared/models/get-user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-page',
@@ -11,16 +11,14 @@ import {Router} from '@angular/router';
   styleUrls: ['./user-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserPageComponent implements OnInit {
+export class UserPageComponent implements OnInit, OnDestroy {
   id: string = localStorage.getItem('id');
   name: string;
   role: string;
   email: string;
   bookIdInUse: string[];
   bookInUse: BooksServerResponse[];
-
-  private subs: Subscription;
-  private subsBook: Subscription;
+  subscriptions: SubscriptionLike[] = [];
 
   constructor(
     private router: Router,
@@ -31,38 +29,30 @@ export class UserPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subs =
-      this.usersInfo.getUsers()
-        .subscribe(data => {
-          this.name = getUser(data, this.id).userName;
-          this.role = getUser(data, this.id).role;
-          this.bookIdInUse = getUser(data, this.id).bookInUse;
-          this.getUserBooks(this.bookIdInUse);
-          this.email = getUser(data, this.id).email;
-          this.cdRef.detectChanges();
-        });
-  }
-
-  getUserBooks(ids): void {
-    let books = [];
-    this.subsBook =
-      this.bookList.getBooks()
-        .subscribe(data => {
-          ids.forEach(id => {
-            books.push(data.find(book => book.id === id));
+    this.subscriptions.push(
+      combineLatest([this.usersInfo.getUsers(), this.bookList.getBooks()]).subscribe(
+        ([usersInfo, bookList]: any) => {
+          this.name = getUser(usersInfo, this.id).userName;
+          this.role = getUser(usersInfo, this.id).role;
+          this.bookIdInUse = getUser(usersInfo, this.id).bookInUse;
+          const i = [];
+          this.bookIdInUse?.forEach(id => {
+            debugger
+            console.log(bookList.find(book => book.id === id));
+            i.push(bookList.find(book => book.id === id));
+            console.log(i);
+            this.bookInUse = i;
           });
-
-          this.bookInUse = books;
+          console.log(this.bookInUse);
+          this.email = getUser(usersInfo, this.id).email;
           this.cdRef.detectChanges();
-        });
+        }
+      ));
   }
-
 
   ngOnDestroy(): void {
-    if (this.subs) {
-      this.subs.unsubscribe();
-    }
-
+    this.subscriptions.forEach(
+      (subscription) => subscription.unsubscribe());
+    this.subscriptions = [];
   }
-
 }

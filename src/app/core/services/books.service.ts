@@ -6,7 +6,7 @@ export interface BooksServerResponse {
   id: string;
   title: string;
   author: string;
-  genre: number;
+  genre: any;
   annotation: string;
   publisher: string;
   stars: number;

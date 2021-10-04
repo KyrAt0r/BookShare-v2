@@ -1,12 +1,22 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../core/services/auth.service';
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer} from '@angular/platform-browser';
-import {LOGO_BOOKS, USER_IMG} from 'src/app/core/const/icons';
+import {
+  LOGO_BOOKS,
+  USER_IMG,
+} from 'src/app/core/const/icons';
 import {UsersService} from '../../core/services/users.service';
-import {Subscription} from 'rxjs';
-import {getUser} from '../../core/models/get-user.model';
+import {getUser} from '../../shared/models/get-user.model';
+import {SubscriptionLike} from 'rxjs';
+
 
 @Component({
   selector: 'app-app-shell',
@@ -14,11 +24,12 @@ import {getUser} from '../../core/models/get-user.model';
   styleUrls: ['./app-shell.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppShellComponent implements OnInit {
+export class AppShellComponent implements OnInit, OnDestroy {
   userName: string;
+  userRole: string;
   booksInUse: number;
+  subscriptions: SubscriptionLike[] = [];
 
-  private userSubs: Subscription;
   private id: string = localStorage.getItem('id');
 
   constructor(
@@ -33,12 +44,12 @@ export class AppShellComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.userSubs = this.usersInfo.getUsers().subscribe(data => {
+    this.subscriptions.push(this.usersInfo.getUsers().subscribe(data => {
       this.userName = getUser(data, this.id).userName;
+      this.userRole = getUser(data, this.id).role;
       this.booksInUse = getUser(data, this.id).bookInUse.length;
       this.cdRef.detectChanges();
-    });
+    }));
 
   }
 
@@ -54,4 +65,9 @@ export class AppShellComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(
+      (subscription) => subscription.unsubscribe());
+    this.subscriptions = [];
+  }
 }

@@ -22,8 +22,8 @@
     <ng-container matColumnDef="chek">
       <th mat-header-cell *matHeaderCellDef>
         <mat-checkbox (change)="$event ? masterToggle() : null"
-                      [checked]="selection.hasValue() && isAllSelected()"
-                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                      [checked]="selection.hasValue() && (dataSource.filteredData.length === selection.selected.length)"
+                      [indeterminate]="selection.hasValue() && !(dataSource.filteredData.length === selection.selected.length)"
                       [matBadge]="selection.selected.length"
                       [matBadgeHidden]="selection.selected.length ===0"
                       matBadgeSize="small"
