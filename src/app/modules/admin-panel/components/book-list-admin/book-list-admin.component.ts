@@ -1,15 +1,21 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { BooksServerResponse, BooksService, GenresResponse } from '../../../../core/services/books.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { SubscriptionLike } from 'rxjs';
-import { MatSort } from '@angular/material/sort';
-import { FormControl, FormGroup } from '@angular/forms';
-import { SelectionModel } from '@angular/cdk/collections';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import {BooksServerResponse, BooksService, GenresResponse} from '../../../../core/services/books.service';
+import {MatTableDataSource} from '@angular/material/table';
+import {Subscription} from 'rxjs';
+import {MatSort} from '@angular/material/sort';
+import {FormControl, FormGroup} from '@angular/forms';
+import {SelectionModel} from '@angular/cdk/collections';
+import {FilteredColumns} from '../../../../core/models/filtered-columns';
+import {MatDialog} from '@angular/material/dialog';
+import {KeepBookDialogComponent} from '../../../../shared/modules/keep-book-dialog/keep-book-dialog/keep-book-dialog.component';
+import {AddBookDialogComponent} from '../../../../shared/modules/add-book-dialog/add-book-dialog.component';
+import {MatPaginator} from '@angular/material/paginator';
 
 interface Columns {
   value: string;
   viewValue: string;
 }
+
 
 @Component({
   selector: 'app-book-list-admin',
@@ -21,7 +27,7 @@ export class BookListAdminComponent implements OnInit, OnDestroy {
   adminStatus: boolean;
   books: BooksServerResponse[] = [];
   displayedColumns: string[] = ['chek', 'title', 'publisher', 'genre', 'author', 'give'];
-  filteredColumns: Columns[] = [
+  filteredColumns: FilteredColumns[] = [
     {value: 'title', viewValue: 'Названию'},
     {value: 'publisher', viewValue: 'Издательству'},
     {value: 'genre', viewValue: 'Жанру'},
@@ -45,11 +51,15 @@ export class BookListAdminComponent implements OnInit, OnDestroy {
     author: ''
   };
 
+  private subsBooks: Subscription;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private bookList: BooksService,
     private cdRef: ChangeDetectorRef,
+    public dialog: MatDialog
   ) {
 
   }
@@ -60,6 +70,7 @@ export class BookListAdminComponent implements OnInit, OnDestroy {
         .subscribe(data => {
           this.dataSource = new MatTableDataSource(data);
           this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
           this.dataSource.filterPredicate = this.tableFilter();
           this.cdRef.detectChanges();
         }));
@@ -110,12 +121,22 @@ export class BookListAdminComponent implements OnInit, OnDestroy {
     };
   }
 
-  giveBook(book): void {
-    console.log(book);
+
+  giveBook(book: BooksServerResponse): void {
+    this.dialog.open(KeepBookDialogComponent, {
+      data: [book],
+    });
   }
 
   keepBooks(): void {
-    console.log(this.selection.selected);
+    this.dialog.open(KeepBookDialogComponent, {
+      data: this.selection.selected,
+    });
+  }
+
+  addBook(){
+    this.dialog.open(AddBookDialogComponent)
+
   }
 
   isAllSelected(): boolean {

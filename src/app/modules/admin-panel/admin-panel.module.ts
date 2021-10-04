@@ -18,6 +18,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatSelectModule} from "@angular/material/select";
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 
 
 
@@ -44,7 +45,10 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatMenuModule,
     MatSelectModule,
     FormsModule,
-    MatBadgeModule
-  ]
+    MatBadgeModule,
+    MatDialogModule
+  ],
+  providers: [
+    { provide: MatDialogRef, useValue: {}}]
 })
 export class AdminPanelModule { }
