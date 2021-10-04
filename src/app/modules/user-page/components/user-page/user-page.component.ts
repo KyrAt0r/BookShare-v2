@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnIni
 import { UsersService } from '../../../../core/services/users.service';
 import { combineLatest, SubscriptionLike } from 'rxjs';
 import { BooksServerResponse, BooksService } from '../../../../core/services/books.service';
-import { getUser } from '../../../../shared/models/get-user.model';
+import { getUser } from '../../../../core/models/get-user.model';
 import { Router } from '@angular/router';
 
 @Component({

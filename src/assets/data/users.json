@@ -34,7 +34,7 @@
     "email": "admin@m",
     "userName": "admin",
     "password": "admin",
-    "role": "user",
+    "role": "admin",
     "bookInUse":[
       "0", "1"
     ]

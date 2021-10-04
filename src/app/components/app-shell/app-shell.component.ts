@@ -3,20 +3,19 @@ import {
   ChangeDetectorRef,
   Component,
   OnDestroy,
-  OnInit,
+  OnInit
 } from '@angular/core';
-import {Router} from '@angular/router';
-import {AuthService} from '../../core/services/auth.service';
-import {MatIconRegistry} from '@angular/material/icon';
-import {DomSanitizer} from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 import {
   LOGO_BOOKS,
   USER_IMG,
 } from 'src/app/core/const/icons';
-import {UsersService} from '../../core/services/users.service';
-import {getUser} from '../../shared/models/get-user.model';
-import {SubscriptionLike} from 'rxjs';
-
+import { UsersService } from '../../core/services/users.service';
+import { SubscriptionLike} from 'rxjs';
+import { getUser } from '../../core/models/get-user.model';
 
 @Component({
   selector: 'app-app-shell',

@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-book-card',
@@ -10,9 +10,13 @@ import {FormBuilder, Validators} from '@angular/forms';
 export class BookCardComponent implements OnInit {
   @Input() book;
 
+  booksCard: FormGroup;
   constructor() {}
 
   ngOnInit(): void {
+    this.booksCard = new FormGroup({
+      starRate: new FormControl(this.book.stars),
+    });
   }
 
 }

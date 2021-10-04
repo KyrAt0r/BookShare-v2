@@ -1,7 +1,12 @@
-<mat-card class="example-card">
-  <img mat-card-image class="example-header-image" src="assets/img/book.png">
-  <mat-card-title>{{book.title}}</mat-card-title>
-  <mat-card-subtitle>{{book.author}} <br>{{book.publisher}}</mat-card-subtitle>
-  <app-star-rate [valStar]="book.stars" [readonly]="true"></app-star-rate>
-  <mat-card-subtitle>{{book.genres}}</mat-card-subtitle>
-</mat-card>
+<form [formGroup]="booksCard">
+  <mat-card class="example-card">
+    <img mat-card-image class="example-header-image" src="assets/img/book.png">
+    <mat-card-title>{{book.title}}</mat-card-title>
+    <mat-card-subtitle>
+      {{book.author}} <br>
+      {{book.publisher}}
+    </mat-card-subtitle>
+    <app-star-rate formControlName="starRate"></app-star-rate>
+    <mat-card-subtitle>{{book.genres}}</mat-card-subtitle>
+  </mat-card>
+</form>
