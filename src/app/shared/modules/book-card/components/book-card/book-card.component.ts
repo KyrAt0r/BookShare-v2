@@ -14,9 +14,11 @@ export class BookCardComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
+    // this.booksCard.get('starRate');
     this.booksCard = new FormGroup({
       starRate: new FormControl(this.book.stars),
     });
+    this.booksCard.valueChanges.subscribe(val => console.log(val));
   }
 
 }
