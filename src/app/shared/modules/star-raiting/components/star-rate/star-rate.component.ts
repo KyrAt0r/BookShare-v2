@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Input, OnDestroy, OnInit, Optional, Self, } from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, Optional, Self,} from '@angular/core';
+import {ControlValueAccessor, FormControl, NgControl} from '@angular/forms';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-star-rate',
@@ -56,7 +55,7 @@ export class StarRatingComponent implements OnInit, OnDestroy, ControlValueAcces
 
   writeValue(value): void {
     // this.starControl.setValue(value);
-    // console.log(this.starControl)
+    console.log(value)
     // this.cdRef.detectChanges();
   }
 

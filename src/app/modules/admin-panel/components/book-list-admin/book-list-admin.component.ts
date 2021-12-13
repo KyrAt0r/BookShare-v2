@@ -12,6 +12,7 @@ import { AddBookDialogComponent } from '../../../../shared/modules/add-book-dial
 import { MatPaginator } from '@angular/material/paginator';
 import { User } from '../../../../core/models/user.models';
 import { UsersService } from '../../../../core/services/users.service';
+import { FakeBackEndService } from '../../../../core/services/fake-back-end.service';
 
 @Component({
   selector: 'app-book-list-admin',
@@ -57,7 +58,8 @@ export class BookListAdminComponent implements OnInit, OnDestroy {
     private bookList: BooksService,
     private cdRef: ChangeDetectorRef,
     public dialog: MatDialog,
-    private usersList: UsersService
+    private usersList: UsersService,
+    private fb: FakeBackEndService
   ) {
   }
 
@@ -116,6 +118,7 @@ export class BookListAdminComponent implements OnInit, OnDestroy {
   }
 
   buildData(books): void {
+    this.books = []
     this.subscriptions.push(this.usersList.getUsers()
       .subscribe(usersResponse => {
         this.users = usersResponse;
@@ -164,7 +167,8 @@ export class BookListAdminComponent implements OnInit, OnDestroy {
   }
 
   addBook(): void {
-    this.dialog.open(AddBookDialogComponent);
+    this.dialog.open(AddBookDialogComponent).afterClosed().subscribe(model => this.buildData(this.fb.books));
+
   }
 
   isAllSelected(): boolean {

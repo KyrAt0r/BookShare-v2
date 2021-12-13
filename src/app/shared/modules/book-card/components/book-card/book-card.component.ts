@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-book-card',
@@ -10,15 +10,13 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class BookCardComponent implements OnInit {
   @Input() book;
 
-  booksCard: FormGroup;
-  constructor() {}
+  booksCard = this.formBuilder.group({
+    starRate: new FormControl()
+  });
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    // this.booksCard.get('starRate');
-    this.booksCard = new FormGroup({
-      starRate: new FormControl(this.book.stars),
-    });
-    this.booksCard.valueChanges.subscribe(val => console.log(val));
+    this.booksCard.get('starRate').patchValue(this.book.stars);
   }
 
 }
