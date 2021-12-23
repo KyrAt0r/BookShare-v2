@@ -11,7 +11,7 @@ export class BookCardComponent implements OnInit {
   @Input() book;
 
   booksCard = this.formBuilder.group({
-    starRate: new FormControl()
+    starRate: new FormControl(),
   });
   constructor(private formBuilder: FormBuilder) {}
 

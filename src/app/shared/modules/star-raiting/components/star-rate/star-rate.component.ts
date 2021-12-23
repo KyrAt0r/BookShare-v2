@@ -1,4 +1,13 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, Optional, Self,} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  Optional,
+  Self,
+} from '@angular/core';
 import {ControlValueAccessor, FormControl, NgControl} from '@angular/forms';
 import {Subject} from 'rxjs';
 
@@ -16,6 +25,8 @@ import {Subject} from 'rxjs';
   // ]
 })
 export class StarRatingComponent implements OnInit, OnDestroy, ControlValueAccessor {
+  @Input() bookId;
+
   stars = [5, 4, 3, 2, 1];
   starControl: FormControl;
   onChange;

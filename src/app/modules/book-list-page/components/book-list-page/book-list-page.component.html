@@ -2,15 +2,9 @@
   <h1 class="title-page">Книги</h1>
   <div class="card-container">
     <app-book-card
-      *ngIf="books[0]"
+      *ngFor="let book of books"
       class="cards"
-      [book]="books[0]"
-    ></app-book-card>
-    {{books[0] | json}}
-    <app-book-card
-      *ngIf="books[1]"
-      class="cards"
-      [book]="books[1]"
+      [book]="book"
     ></app-book-card>
   </div>
 </div>
