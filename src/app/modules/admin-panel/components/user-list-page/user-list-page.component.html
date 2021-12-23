@@ -10,17 +10,17 @@
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="login">
         <th mat-header-cell *matHeaderCellDef> Логин</th>
-        <td mat-cell *matCellDef="let users"> {{users.userName}} </td>
+        <td mat-cell *matCellDef="let users" (click)="onClick(users)"> {{users.userName}} </td>
       </ng-container>
 
       <ng-container matColumnDef="e-mail">
         <th mat-header-cell *matHeaderCellDef> E-mail</th>
-        <td mat-cell *matCellDef="let users"> {{users.email}} </td>
+        <td mat-cell *matCellDef="let users" (click)="onClick(users)"> {{users.email}} </td>
       </ng-container>
 
       <ng-container matColumnDef="role">
         <th mat-header-cell *matHeaderCellDef> Роль</th>
-        <td mat-cell *matCellDef="let users"> {{users.role}} </td>
+        <td mat-cell *matCellDef="let users" (click)="onClick(users)"> {{users.role}} </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

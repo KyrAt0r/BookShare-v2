@@ -1,9 +1,11 @@
-import {ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/core';
-import {UsersService} from '../../../../core/services/users.service';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
-import {Subscription} from 'rxjs';
-import {User} from '../../../../core/models/user.models';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { UsersService } from '../../../../core/services/users.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { Subscription } from 'rxjs';
+import { User } from '../../../../core/models/user.models';
+import { MatDialog } from '@angular/material/dialog';
+import { UserPageComponent } from '../../../user-page/components/user-page/user-page.component';
 
 @Component({
   selector: 'app-user-list-page',
@@ -13,12 +15,15 @@ import {User} from '../../../../core/models/user.models';
   providers: [UsersService]
 })
 
-export class UserListPageComponent implements OnInit {
+export class UserListPageComponent implements OnInit, OnDestroy {
 
   users: User[] = [];
   private subs: Subscription;
 
-  constructor(private usersList: UsersService) {
+  constructor(
+    private usersList: UsersService,
+    public dialog: MatDialog
+  ) {
   }
 
   displayedColumns: string[] = ['login', 'e-mail', 'role'];
@@ -28,6 +33,12 @@ export class UserListPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUsers();
+  }
+
+  ngOnDestroy() {
+    if (this.subs) {
+      this.subs.unsubscribe();
+    }
   }
 
   // tslint:disable-next-line:typedef
@@ -46,7 +57,12 @@ export class UserListPageComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  ngOnDestroy() {
-    if (this.subs) this.subs.unsubscribe()
+
+  onClick(user: User[]) {
+    this.dialog.open(UserPageComponent, {
+      width: '90rem',
+      height: '47rem',
+      data: user
+    });
   }
 }

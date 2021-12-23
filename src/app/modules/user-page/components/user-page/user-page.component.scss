@@ -1,0 +1,19 @@
+.content{
+  .name {
+
+  }
+  .email{
+
+  }
+  .role{}
+  .books{
+    display: grid;
+    gap: 15px 15px;
+    .info{
+      overflow: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(19em, 1fr));
+      justify-items: center
+    }
+  }
+}

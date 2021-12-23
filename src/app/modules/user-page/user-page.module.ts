@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { UserPageRoutingModule } from './user-page-routing.module';
 import { UserPageComponent } from './components/user-page/user-page.component';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
@@ -11,7 +14,17 @@ import { UserPageComponent } from './components/user-page/user-page.component';
   ],
   imports: [
     CommonModule,
-    UserPageRoutingModule
+    UserPageRoutingModule,
+    MatDialogModule,
+    MatButtonModule,
+    SharedModule
+  ],
+  entryComponents: [
+    UserPageComponent
+  ],
+  providers: [
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} }
   ]
 })
 export class UserPageModule { }

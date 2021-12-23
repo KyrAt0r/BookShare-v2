@@ -12,6 +12,8 @@
       <li><a [routerLink]="'home'">Главная</a></li>
       <li><a [routerLink]="'book-list'">Список книг</a></li>
       <li><a [routerLink]="''">в разработке</a></li>
+      <li *ngIf="userRole === 'admin'"><a [routerLink]="'admin/book-list'">Книги</a></li>
+      <li *ngIf="userRole === 'admin'"><a [routerLink]="'admin/user-list'">Пользователи</a></li>
     </ul>
   </nav>
   <div class="header__personal-info">

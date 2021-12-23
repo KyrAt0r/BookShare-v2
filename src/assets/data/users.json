@@ -25,9 +25,7 @@
     "userName": "God",
     "password": "God",
     "role": "admin",
-    "bookInUse": [
-      "0", "1", "2"
-    ]
+    "bookInUse": []
   },
   {
     "id": "d772d39e-8490-43df-8a66-be801a609a92",
