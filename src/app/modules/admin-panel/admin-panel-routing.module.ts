@@ -8,7 +8,7 @@ import {UserListPageComponent} from './components/user-list-page/user-list-page.
 
 const routes: Routes = [
   {
-    path: 'a',
+    path: '',
     component: AdminPanelComponent,
   },
   {
@@ -16,7 +16,7 @@ const routes: Routes = [
     component: AddBooksComponent,
   },
   {
-    path: '',
+    path: 'book-list',
     component: BookListAdminComponent,
   },
   {

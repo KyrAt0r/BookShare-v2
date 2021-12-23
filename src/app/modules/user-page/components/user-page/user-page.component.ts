@@ -37,7 +37,6 @@ export class UserPageComponent implements OnInit, OnDestroy {
           this.bookIdInUse = getUser(usersInfo, this.id).bookInUse;
           const i = [];
           this.bookIdInUse?.forEach(id => {
-            debugger
             console.log(bookList.find(book => book.id === id));
             i.push(bookList.find(book => book.id === id));
             console.log(i);

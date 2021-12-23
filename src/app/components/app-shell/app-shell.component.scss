@@ -98,10 +98,10 @@ $content-color: $content-color;
   display: grid;
   grid-template-columns: 1fr 5fr 1fr;
   background: $bg-main-color;
+  overflow: auto;
 
   .content{
     grid-area: 1 / 2 / 2 / 3;
     background: $content-color;
-
   }
 }

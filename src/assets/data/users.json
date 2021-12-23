@@ -45,7 +45,7 @@
     "userName": "user374",
     "password": "user374",
     "role": "user",
-    "bookInUse": ""
+    "bookInUse": []
   },
   {
     "id": "923c5166-d820-4eec-a8a7-00e8e873e632",
@@ -53,7 +53,7 @@
     "userName": "KKKKuser",
     "password": "KKKK",
     "role": "user",
-    "bookInUse": ""
+    "bookInUse": []
   },
   {
     "id": "4064bf5c-ca15-4ed5-96e8-f5f7ab0da9f2",
@@ -61,7 +61,7 @@
     "userName": "SadLion",
     "password": "SadLion",
     "role": "user",
-    "bookInUse": ""
+    "bookInUse": []
   },
   {
     "id": "2dd2282a-d7eb-4369-9eef-6927513f8f11",
@@ -69,7 +69,7 @@
     "userName": "GGman",
     "password": "GGman",
     "role": "user",
-    "bookInUse": ""
+    "bookInUse": []
   },
   {
     "id": "605243b5-76c2-4927-8894-fc473eef174d",
@@ -77,7 +77,7 @@
     "userName": "uSer2312",
     "password": "uSer2312",
     "role": "user",
-    "bookInUse": ""
+    "bookInUse": []
   },
   {
     "id": "8fc807a7-1eec-423f-b614-e0ae8be069ba",
@@ -85,7 +85,7 @@
     "userName": "uSer",
     "password": "uSer",
     "role": "user",
-    "bookInUse": ""
+    "bookInUse": []
   },
   {
     "id": "9f5ee2bb-b134-4691-abab-822c28b443fe",
@@ -93,7 +93,7 @@
     "userName": "user100",
     "password": "user100",
     "role": "user",
-    "bookInUse": ""
+    "bookInUse": []
   },
   {
     "id": "b6157290-0e76-467a-b267-2a1aed956ce1",
@@ -101,7 +101,7 @@
     "userName": "user312",
     "password": "user312",
     "role": "user",
-    "bookInUse": ""
+    "bookInUse": []
   },
   {
     "id": "555b352b-a556-451f-aee8-425afd6e780f",
@@ -109,7 +109,7 @@
     "userName": "user3",
     "password": "user3",
     "role": "user",
-    "bookInUse": ""
+    "bookInUse": ["7"]
   }
 ]
 

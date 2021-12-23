@@ -3,10 +3,10 @@
     <input
       [formControl]="starControl"
       type="radio"
-      name="star"
-      id="star-{{star}}"
+      name="star-{{bookId}}"
+      id="star-{{bookId}}-{{star}}"
       [value]="star"
     >
-    <label for="star-{{star}}"></label>
+    <label for="star-{{bookId}}-{{star}}"></label>
   </ng-container>
 </div>

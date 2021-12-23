@@ -1,19 +1,19 @@
 <h1 mat-dialog-title>Добавить книгу</h1>
 <div mat-dialog-content>
-  <form class="example-form">
+  <form class="example-form" [formGroup]="addBookForm">
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Название книги</mat-label>
-      <input matInput>
+      <input matInput formControlName="bookTitle">
     </mat-form-field>
 
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Автор книги</mat-label>
-      <input matInput>
+      <input matInput formControlName="bookAuthor">
     </mat-form-field>
 
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Жанры</mat-label>
-      <mat-select>
+      <mat-select formControlName="bookGenre">
         <mat-option>1</mat-option>
         <mat-option>2</mat-option>
       </mat-select>
@@ -21,7 +21,15 @@
 
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Аннотация</mat-label>
-      <textarea matInput></textarea>
+      <textarea matInput formControlName="bookAnnotation"></textarea>
     </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Издатель</mat-label>
+      <input matInput formControlName="bookPublisher">
+    </mat-form-field>
+
+    <button mat-button color="primary" (click)="accept()">Добавить</button>
+    <button mat-button mat-dialog-close color="warn">Отмена</button>
   </form>
 </div>

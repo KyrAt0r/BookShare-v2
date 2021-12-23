@@ -1,16 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild
-} from '@angular/core';
-import {
-  BooksServerResponse,
-  BooksService,
-  GenresResponse
-} from '../../../../core/services/books.service';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { BooksServerResponse, BooksService, GenresResponse } from '../../../../core/services/books.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription, SubscriptionLike } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
@@ -21,6 +10,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { KeepBookDialogComponent } from '../../../../shared/modules/keep-book-dialog/keep-book-dialog/keep-book-dialog.component';
 import { AddBookDialogComponent } from '../../../../shared/modules/add-book-dialog/add-book-dialog.component';
 import { MatPaginator } from '@angular/material/paginator';
+import { User } from '../../../../core/models/user.models';
+import { UsersService } from '../../../../core/services/users.service';
+import { FakeBackEndService } from '../../../../core/services/fake-back-end.service';
 
 @Component({
   selector: 'app-book-list-admin',
@@ -31,6 +23,7 @@ import { MatPaginator } from '@angular/material/paginator';
 export class BookListAdminComponent implements OnInit, OnDestroy {
   adminStatus: boolean;
   books: BooksServerResponse[] = [];
+  users: User[] = [];
   displayedColumns: string[] = ['chek', 'title', 'publisher', 'genre', 'author', 'give'];
   filteredColumns: FilteredColumns[] = [
     {value: 'title', viewValue: 'Названию'},
@@ -64,19 +57,17 @@ export class BookListAdminComponent implements OnInit, OnDestroy {
   constructor(
     private bookList: BooksService,
     private cdRef: ChangeDetectorRef,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private usersList: UsersService,
+    private fb: FakeBackEndService
   ) {
-
   }
 
   ngOnInit(): void {
     this.subscriptions.push(
       this.bookList.getBooks()
         .subscribe(data => {
-          this.dataSource = new MatTableDataSource(data);
-          this.dataSource.sort = this.sort;
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.filterPredicate = this.tableFilter();
+          this.buildData(data);
           this.cdRef.detectChanges();
         }));
 
@@ -126,6 +117,42 @@ export class BookListAdminComponent implements OnInit, OnDestroy {
     };
   }
 
+  buildData(books): void {
+    this.books = []
+    this.subscriptions.push(this.usersList.getUsers()
+      .subscribe(usersResponse => {
+        this.users = usersResponse;
+        books.forEach(book => {
+          const newBook = this.generateBook(book);
+          this.books.push(newBook);
+          this.dataSource = new MatTableDataSource(this.books);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.filterPredicate = this.tableFilter();
+        });
+      }));
+  }
+
+  generateBook(book): any {
+    return {
+      id: book.id,
+      title: book.title,
+      author: book.author,
+      genre: book.genre,
+      annotation: book.annotation,
+      publisher: book.publisher,
+      stars: book.stars,
+      inUse: this.bookStatus(book.id)
+    };
+  }
+
+  bookStatus(id): boolean {
+    let inUse = false;
+    this.users.forEach(user => {
+      if (user.bookInUse.some(bookId => bookId === id)) { inUse = true; }
+    });
+    return inUse;
+  }
 
   giveBook(book: BooksServerResponse): void {
     this.dialog.open(KeepBookDialogComponent, {
@@ -139,8 +166,9 @@ export class BookListAdminComponent implements OnInit, OnDestroy {
     });
   }
 
-  addBook(){
-    this.dialog.open(AddBookDialogComponent);
+  addBook(): void {
+    this.dialog.open(AddBookDialogComponent).afterClosed().subscribe(model => this.buildData(this.fb.books));
+
   }
 
   isAllSelected(): boolean {
