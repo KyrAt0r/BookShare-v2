@@ -10,7 +10,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {BookCardComponent} from './modules/book-card/components/book-card/book-card.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
-import {AddBookDialogComponent} from './modules/add-book-dialog/add-book-dialog.component';
+import { AddBookDialogComponent } from './modules/add-book-dialog/add-book-dialog.component';
+import { AddUserDialogComponent } from './modules/add-user-dialog/add-user-dialog.component';
 
 
 @NgModule({
@@ -19,11 +20,13 @@ import {AddBookDialogComponent} from './modules/add-book-dialog/add-book-dialog.
     BookCardComponent,
 
     KeepBookDialogComponent,
-    AddBookDialogComponent
+    AddBookDialogComponent,
+    AddUserDialogComponent
   ],
   entryComponents: [
     KeepBookDialogComponent,
-    AddBookDialogComponent
+    AddBookDialogComponent,
+    AddUserDialogComponent
   ],
   imports: [
     CommonModule,

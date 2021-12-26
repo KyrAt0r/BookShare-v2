@@ -21,4 +21,4 @@
     </div>
   </div>
 </div>
-<button mat-button (click)="onNoClick()">Cancel</button>
+<button *ngIf="isModal" mat-button (click)="onNoClick()">Cancel</button>

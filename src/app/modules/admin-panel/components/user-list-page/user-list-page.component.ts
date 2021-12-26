@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { UsersService } from '../../../../core/services/users.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -6,6 +6,8 @@ import { Subscription } from 'rxjs';
 import { User } from '../../../../core/models/user.models';
 import { MatDialog } from '@angular/material/dialog';
 import { UserPageComponent } from '../../../user-page/components/user-page/user-page.component';
+import { AddUserDialogComponent } from '../../../../shared/modules/add-user-dialog/add-user-dialog.component';
+import { FakeBackEndService } from '../../../../core/services/fake-back-end.service';
 
 @Component({
   selector: 'app-user-list-page',
@@ -22,7 +24,9 @@ export class UserListPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private usersList: UsersService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private cdRef: ChangeDetectorRef,
+    private fb: FakeBackEndService,
   ) {
   }
 
@@ -46,8 +50,8 @@ export class UserListPageComponent implements OnInit, OnDestroy {
     this.subs =
       this.usersList.getUsers()
         .subscribe(data => {
-          this.dataSource = new MatTableDataSource(data);
-          this.dataSource.paginator = this.paginator;
+          this.buildData(data);
+          this.cdRef.detectChanges();
         });
   }
 
@@ -59,10 +63,20 @@ export class UserListPageComponent implements OnInit, OnDestroy {
 
 
   onClick(user: User[]) {
+    console.log(user);
     this.dialog.open(UserPageComponent, {
       width: '90rem',
       height: '47rem',
       data: user
     });
+  }
+
+  addUser() {
+    this.dialog.open(AddUserDialogComponent).afterClosed().subscribe(model => this.buildData(this.fb.users));
+  }
+
+  private buildData(user: User[]) {
+    this.dataSource = new MatTableDataSource(user);
+    this.dataSource.paginator = this.paginator;
   }
 }

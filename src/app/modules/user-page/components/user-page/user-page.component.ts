@@ -23,6 +23,8 @@ export class UserPageComponent implements OnInit, OnDestroy {
   bookInUse: BooksServerResponse[];
   subscriptions: SubscriptionLike[] = [];
 
+  isModal: boolean;
+
   constructor(
     private router: Router,
     private usersInfo: UsersService,
@@ -35,6 +37,7 @@ export class UserPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (Object.keys(this.externalUser).length !== 0) {
+      this.isModal = true;
       this.subscriptions.push(
         this.bookList.getBooks().subscribe(bookList => {
           this.name = this.externalUser.userName;
@@ -49,6 +52,7 @@ export class UserPageComponent implements OnInit, OnDestroy {
         })
       );
     } else {
+      this.isModal = false;
       this.subscriptions.push(
         combineLatest([this.usersInfo.getUsers(), this.bookList.getBooks()]).subscribe(
           ([usersInfo, bookList]: any) => {
